@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.51" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <meta property="og:url" content="https://mister-hope.github.io/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html"><meta property="og:site_name" content="huluhutublog"><meta property="og:title" content="EL与JSTL"><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><link rel="icon" href="/huluhutublog/favicon.ico"><link rel="icon" href="/huluhutublog/assets/icon/chrome-mask-512.png" type="image/png" sizes="512x512"><link rel="icon" href="/huluhutublog/assets/icon/chrome-mask-192.png" type="image/png" sizes="192x192"><link rel="icon" href="/huluhutublog/assets/icon/chrome-512.png" type="image/png" sizes="512x512"><link rel="icon" href="/huluhutublog/assets/icon/chrome-192.png" type="image/png" sizes="192x192"><link rel="manifest" href="/huluhutublog/manifest.webmanifest" crossorigin="use-credentials"><meta name="theme-color" content="#46bd87"><link rel="apple-touch-icon" href="/huluhutublog/assets/icon/apple-icon-152.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="msapplication-TileImage" content="/huluhutublog/assets/icon/ms-icon-144.png"><meta name="msapplication-TileColor" content="#ffffff"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><title>EL与JSTL | huluhutublog</title><meta name="description" content="That is my Blog!!!">
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme="dark"] {
+        --bg-color: #1d2025;
+      }
+
+      html,
+      body {
+        background-color: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.querySelector("html").setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="stylesheet" href="/huluhutublog/assets/style.dc69c01e.css">
+    <link rel="modulepreload" href="/huluhutublog/assets/app.0662e65c.js"><link rel="modulepreload" href="/huluhutublog/assets/5-EL与JSTL.html.ab2d1c81.js"><link rel="modulepreload" href="/huluhutublog/assets/_plugin-vue_export-helper.cdc0426e.js"><link rel="modulepreload" href="/huluhutublog/assets/5-EL与JSTL.html.6bd8628a.js">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="skip-link sr-only">Skip to content</a><!--]--><div class="theme-container has-toc"><!--[--><!--[--><header class="navbar"><div class="navbar-left"><button class="toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!----><a href="/huluhutublog/" class="brand"><img class="logo" src="/huluhutublog/logo.svg" alt="huluhutublog"><!----><span class="site-name hide-in-pad">huluhutublog</span></a><!----></div><div class="navbar-center"><!----><nav class="nav-links"><div class="nav-item hide-in-mobile"><a href="/huluhutublog/" class="nav-link" aria-label="HULUHUTU"><span class="icon iconfont icon-home"></span>HULUHUTU<!----></a></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="面试"><span class="title"><span class="icon iconfont icon-note"></span>面试</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Interviews/Java/" class="nav-link" aria-label="Java"><!---->Java<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="计算机基础"><span class="title"><span class="icon iconfont icon-note"></span>计算机基础</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/DataStructuresAndAlgorithms/" class="nav-link" aria-label="数据结构与算法"><!---->数据结构与算法<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/ComputerNetwork/" class="nav-link" aria-label="计算机网络"><!---->计算机网络<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/OperatingSystem/" class="nav-link" aria-label="操作系统"><!---->操作系统<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/PrinciplesOfComputerOrganization/" class="nav-link" aria-label="计算机组成原理"><!---->计算机组成原理<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/PrinciplesOfDatabase/" class="nav-link" aria-label="数据库原理"><!---->数据库原理<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/DesignPatterns/" class="nav-link" aria-label="设计模式"><!---->设计模式<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="Java"><span class="title"><span class="icon iconfont icon-note"></span>Java</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaBase/" class="nav-link" aria-label="Java基础"><!---->Java基础<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaIO/" class="nav-link" aria-label="JavaIO"><!---->JavaIO<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaCollection/" class="nav-link" aria-label="Java集合"><!---->Java集合<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaConcurrent/" class="nav-link" aria-label="Java并发编程"><!---->Java并发编程<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JVM/JVM.html" class="nav-link" aria-label="JVM"><!---->JVM<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="数据库"><span class="title"><span class="icon iconfont icon-note"></span>数据库</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/DB/MySQL/" class="nav-link" aria-label="MySQL"><!---->MySQL<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DB/Redis/" class="nav-link" aria-label="Redis"><!---->Redis<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="Spring"><span class="title"><span class="icon iconfont icon-note"></span>Spring</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/Spring/" class="nav-link" aria-label="Spring"><!---->Spring<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/SpringMVC/" class="nav-link" aria-label="SpringMVC"><!---->SpringMVC<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/SpringBoot/" class="nav-link" aria-label="SpringBoot"><!---->SpringBoot<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/SpringCloud/" class="nav-link" aria-label="SpringCloud"><!---->SpringCloud<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="消息队列"><span class="title"><span class="icon iconfont icon-note"></span>消息队列</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/MQ/RabbitMQ/" class="nav-link" aria-label="RabbitMQ"><!---->RabbitMQ<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/MQ/RocketMQ/" class="nav-link" aria-label="RocketMQ"><!---->RocketMQ<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/MQ/Kafka/" class="nav-link" aria-label="Kafka"><!---->Kafka<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="分布式"><span class="title"><span class="icon iconfont icon-note"></span>分布式</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Distributed/Artritecture/" class="nav-link" aria-label="架构"><!---->架构<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Distributed/Distributed/" class="nav-link" aria-label="分布式理论"><!---->分布式理论<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="开发工具"><span class="title"><span class="icon iconfont icon-note"></span>开发工具</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Git/" class="nav-link" aria-label="Git"><!---->Git<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Linux/" class="nav-link" aria-label="Linux"><!---->Linux<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Docker/" class="nav-link" aria-label="Docker"><!---->Docker<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Maven/" class="nav-link" aria-label="Maven"><!---->Maven<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="项目"><span class="title"><span class="icon iconfont icon-note"></span>项目</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Project/SwiftHome/" class="nav-link" aria-label="快捷到家"><!---->快捷到家<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="部署"><span class="title"><span class="icon iconfont icon-note"></span>部署</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Deploy/Blog/" class="nav-link" aria-label="vuepress"><!---->vuepress<!----></a></li></ul></button></div></div></nav><!----></div><div class="navbar-right"><!----><!----><div class="nav-item"><a class="repo-link" href="https://github.com/vuepress-theme-hope/vuepress-theme-hope" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><div class="nav-item hide-in-mobile"><button class="outlook-button" tabindex="-1" ariahidden="true"><svg xmlns="http://www.w3.org/2000/svg" class="icon outlook-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="outlook icon"><path d="M224 800c0 9.6 3.2 44.8 6.4 54.4 6.4 48-48 76.8-48 76.8s80 41.6 147.2 0 134.4-134.4 38.4-195.2c-22.4-12.8-41.6-19.2-57.6-19.2C259.2 716.8 227.2 761.6 224 800zM560 675.2l-32 51.2c-51.2 51.2-83.2 32-83.2 32 25.6 67.2 0 112-12.8 128 25.6 6.4 51.2 9.6 80 9.6 54.4 0 102.4-9.6 150.4-32l0 0c3.2 0 3.2-3.2 3.2-3.2 22.4-16 12.8-35.2 6.4-44.8-9.6-12.8-12.8-25.6-12.8-41.6 0-54.4 60.8-99.2 137.6-99.2 6.4 0 12.8 0 22.4 0 12.8 0 38.4 9.6 48-25.6 0-3.2 0-3.2 3.2-6.4 0-3.2 3.2-6.4 3.2-6.4 6.4-16 6.4-16 6.4-19.2 9.6-35.2 16-73.6 16-115.2 0-105.6-41.6-198.4-108.8-268.8C704 396.8 560 675.2 560 675.2zM224 419.2c0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 28.8-22.4 51.2-51.2 51.2C246.4 470.4 224 448 224 419.2zM320 284.8c0-22.4 19.2-41.6 41.6-41.6 22.4 0 41.6 19.2 41.6 41.6 0 22.4-19.2 41.6-41.6 41.6C339.2 326.4 320 307.2 320 284.8zM457.6 208c0-12.8 12.8-25.6 25.6-25.6 12.8 0 25.6 12.8 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6C470.4 233.6 457.6 220.8 457.6 208zM128 505.6C128 592 153.6 672 201.6 736c28.8-60.8 112-60.8 124.8-60.8-16-51.2 16-99.2 16-99.2l316.8-422.4c-48-19.2-99.2-32-150.4-32C297.6 118.4 128 291.2 128 505.6zM764.8 86.4c-22.4 19.2-390.4 518.4-390.4 518.4-22.4 28.8-12.8 76.8 22.4 99.2l9.6 6.4c35.2 22.4 80 12.8 99.2-25.6 0 0 6.4-12.8 9.6-19.2 54.4-105.6 275.2-524.8 288-553.6 6.4-19.2-3.2-32-19.2-32C777.6 76.8 771.2 80 764.8 86.4z"></path></svg><div class="outlook-dropdown"><!----></div></button></div><!----><!----><button class="toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span class="button-container"><span class="button-top"></span><span class="button-middle"></span><span class="button-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow left"></span></div><aside class="sidebar"><!--[--><!----><!--]--><ul class="sidebar-links"><li><section class="sidebar-group"><button class="sidebar-heading clickable"><span class="icon iconfont icon-note"></span><span class="title">Java基础</span><span class="arrow right"></span></button><!----></section></li><li><section class="sidebar-group"><button class="sidebar-heading clickable"><span class="icon iconfont icon-note"></span><span class="title">JavaIO</span><span class="arrow right"></span></button><!----></section></li><li><section class="sidebar-group"><button class="sidebar-heading clickable"><span class="icon iconfont icon-note"></span><span class="title">Java集合</span><span class="arrow right"></span></button><!----></section></li><li><section class="sidebar-group"><button class="sidebar-heading clickable"><span class="icon iconfont icon-note"></span><span class="title">Java并发</span><span class="arrow right"></span></button><!----></section></li><li><section class="sidebar-group"><button class="sidebar-heading clickable"><span class="icon iconfont icon-note"></span><span class="title">JVM</span><span class="arrow right"></span></button><!----></section></li></ul><!--[--><!----><!--]--></aside><!--[--><main class="page" id="main-content"><!--[--><!----><nav class="breadcrumb disable"></nav><div class="page-title"><h1><!---->EL与JSTL</h1><div class="page-info"><span class="author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="author-item" href="https://mrhope.site" target="_blank" rel="noopener noreferrer">huluhutu</a></span><span property="author" content="huluhutu"></span></span><!----><!----><!----><!----><span class="reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 8 分钟</span><meta property="timeRequired" content="PT8M"></span></div><hr></div><div class="toc-place-holder"><aside id="toc"><div class="toc-header">此页内容</div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_1-el表达式" class="router-link-active router-link-exact-active toc-link level2">1-EL表达式</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_1、特点" class="router-link-active router-link-exact-active toc-link level3">1、特点</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_2、域对象" class="router-link-active router-link-exact-active toc-link level3">2、域对象</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_3、支持的运算" class="router-link-active router-link-exact-active toc-link level3">3、支持的运算</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_4、el表达式的缺陷" class="router-link-active router-link-exact-active toc-link level3">4、EL表达式的缺陷</a></li><!----><!--]--></ul><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_2-jstl标签工具" class="router-link-active router-link-exact-active toc-link level2">2-JSTL标签工具</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_1、基本介绍" class="router-link-active router-link-exact-active toc-link level3">1、基本介绍</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_2、使用方式" class="router-link-active router-link-exact-active toc-link level3">2、使用方式</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_3、重要标签的使用" class="router-link-active router-link-exact-active toc-link level3">3、重要标签的使用</a></li><!----><!--]--></ul><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_3-路径问题" class="router-link-active router-link-exact-active toc-link level2">3-路径问题</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/Java/JavaWeb/5-EL%E4%B8%8EJSTL.html#_4-错误页面和404页面" class="router-link-active router-link-exact-active toc-link level2">4-错误页面和404页面</a></li><!----><!--]--></ul></div></aside></div><!----><div class="theme-hope-content"><h1 id="el与jstl" tabindex="-1"><a class="header-anchor" href="#el与jstl" aria-hidden="true">#</a> EL与JSTL</h1><h2 id="_1-el表达式" tabindex="-1"><a class="header-anchor" href="#_1-el表达式" aria-hidden="true">#</a> 1-EL表达式</h2><h3 id="_1、特点" tabindex="-1"><a class="header-anchor" href="#_1、特点" aria-hidden="true">#</a> 1、特点</h3><p>（1）是一个由java开发的工具包</p><p>（2）用于从特定域对象中读取数据，不能向域对象中写入。</p><p>（3）EL工具包自动存在Tomcat的lib中（el-api.jar），开发是可以直接使用，无需其他额外的包。</p><p>（4）标准格式 ： ${域对象别名.关键字} 到指定的域中获取相应关键字的内容，并将其写入到响应体。</p><h3 id="_2、域对象" tabindex="-1"><a class="header-anchor" href="#_2、域对象" aria-hidden="true">#</a> 2、域对象</h3><table><thead><tr><th>jsp</th><th>el</th><th>描述</th></tr></thead><tbody><tr><td>application</td><td>applicationScope</td><td>全局作用域对象</td></tr><tr><td>session</td><td>sessionScope</td><td>会话作用域</td></tr><tr><td>request</td><td>requestScope</td><td>请求作用域对象</td></tr><tr><td>pageContext</td><td>pageScope</td><td>当前页作用域对象</td></tr></tbody></table><p><strong>注：使用时可以省略域对象别名</strong></p><p>默认查找顺序： pageScope -&gt; requestScope -&gt; sessionScope -&gt; applicationScope</p><p><strong>最好只在pageScope中省略</strong></p><p>注：对应案例</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;jsp&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;%
+    application.setAttribute(&quot;name&quot;,&quot;application&quot;);
+    session.setAttribute(&quot;name&quot;,&quot;session&quot;);
+    request.setAttribute(&quot;name&quot;,&quot;request&quot;);
+    pageContext.setAttribute(&quot;name&quot;,&quot;pageContext&quot;);
+  %&gt;
+  &lt;br&gt;--------------------使用java语言---------------------------&lt;br&gt;
+  application中的值：&lt;%= application.getAttribute(&quot;name&quot;) %&gt; &lt;br&gt;
+  session中的值：&lt;%= session.getAttribute(&quot;name&quot;) %&gt; &lt;br&gt;
+  request中的值：&lt;%= request.getAttribute(&quot;name&quot;) %&gt; &lt;br&gt;
+  pageContext中的值：&lt;%= pageContext.getAttribute(&quot;name&quot;) %&gt; &lt;br&gt;
+
+  &lt;br&gt;--------------------使用EL表达式---------------------------&lt;br&gt;
+  application中的值：${applicationScope.name} &lt;br&gt;
+  session中的值：${sessionScope.name} &lt;br&gt;
+  request中的值：${requestScope.name} &lt;br&gt;
+  pageContext中的值：${pageScope.name} &lt;br&gt;
+
+  &lt;br&gt;----------------使用EL表达式,省略域对象---------------------&lt;br&gt;
+  application中的值：${name} &lt;br&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3、支持的运算" tabindex="-1"><a class="header-anchor" href="#_3、支持的运算" aria-hidden="true">#</a> 3、支持的运算</h3><p>（1）数学运算</p><p>（2）比较运算 &gt; gt &lt; lt &gt;= ge &lt;= le == eq != !=</p><p>（3）逻辑预算 &amp;&amp; || ！</p><p>注：对应案例</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;EL运算&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;%
+    request.setAttribute(&quot;num1&quot;,&quot;12&quot;);
+    request.setAttribute(&quot;num2&quot;,&quot;14&quot;);
+
+    application.setAttribute(&quot;flag1&quot;,true);
+    application.setAttribute(&quot;flag2&quot;,false);
+%&gt;
+&lt;br&gt;--------------------使用java语言---------------------------&lt;br&gt;
+&lt;%
+    String num1 = (String)request.getAttribute(&quot;num1&quot;);
+    String num2 = (String)request.getAttribute(&quot;num2&quot;);
+    int num3 = Integer.parseInt(num1) + Integer.parseInt(num2);
+    
+    boolean flag1 = (Boolean) application.getAttribute(&quot;flag1&quot;);
+    boolean flag2 = (Boolean) application.getAttribute(&quot;flag2&quot;);
+    boolean flag3 = flag1 &amp;&amp; flag2;
+    //输出方式一
+    out.write(Boolean.toString(flag3));
+%&gt;
+&lt;!-- 输出方式二 --&gt;
+&lt;h1&gt;&lt;%=num3%&gt;&lt;/h1&gt;
+
+&lt;br&gt;--------------------使用EL表达式--------------------------&lt;br&gt;
+&lt;h1&gt;${ requestScope.num1 + requestScope.num2 }&lt;/h1&gt;
+&lt;h1&gt;${ requestScope.num1 &gt; requestScope.num2 }&lt;/h1&gt;
+&lt;h1&gt;${ applicationScope.flag1 &amp;&amp; applicationScope.flag2 }&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_4、el表达式的缺陷" tabindex="-1"><a class="header-anchor" href="#_4、el表达式的缺陷" aria-hidden="true">#</a> 4、EL表达式的缺陷</h3><p>（1）只能读取域对象中的值，不能写入</p><p>（2）不支持if判断和控制语句</p><h2 id="_2-jstl标签工具" tabindex="-1"><a class="header-anchor" href="#_2-jstl标签工具" aria-hidden="true">#</a> 2-JSTL标签工具</h2><h3 id="_1、基本介绍" tabindex="-1"><a class="header-anchor" href="#_1、基本介绍" aria-hidden="true">#</a> 1、基本介绍</h3><p>（1） JSP Standrad Tag Lib jsp标准标签库</p><div class="language-html ext-html line-numbers-mode"><pre class="language-html"><code>核心标签      对java在jsp上基本功能进行封装，如 if while等    主要学习
+sql标签      JDBC在jsp上的使用
+xml标签      Dom4j在jsp上的使用
+format标签   jsp文件格式转换
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>（4）使用原因：<strong>使用简单，且在JSP编程当中要求尽量不出现java代码。</strong></p><h3 id="_2、使用方式" tabindex="-1"><a class="header-anchor" href="#_2、使用方式" aria-hidden="true">#</a> 2、使用方式</h3><p>（1）tomcat10 以前的导入依赖的jar包 jstl.jar standard.jar</p><p>下载地址<a href="http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/" target="_blank" rel="noopener noreferrer">http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></p><p>tomcat10以后使用 jakarta.servlet.jsp.jstl-2.0.0.jar</p><p>当然在tomcat10中也有这两个jar包，找到tomcat10中的例子程序：</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>D:\javaweb\tomcat\apache-tomcat-10.0.11\apache-tomcat-10.0.11\webapps\examples\WEB-INF\lib
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20211013140248426.png" alt="image-20211013140248426" loading="lazy"></p><p>（2）在jsp中引入JSTL的core包依赖约束</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_3、重要标签的使用" tabindex="-1"><a class="header-anchor" href="#_3、重要标签的使用" aria-hidden="true">#</a> 3、重要标签的使用</h3><h4 id="_1-c-set" tabindex="-1"><a class="header-anchor" href="#_1-c-set" aria-hidden="true">#</a> （1） &lt;c:set&gt;</h4><p>在JSP文件上设置域对象中的共享数据</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot;%&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;  c:set  &lt;/title&gt;
+&lt;/head&gt;
+    &lt;body&gt;
+        &lt;!--
+        相当于
+        &lt;%--  &lt;%   --%&gt;
+        &lt;%--   request.setAttribute(&quot;name&quot;,&quot;zhangsan&quot;);--%&gt;
+        &lt;%--  %&gt;  --%&gt;
+        --&gt;
+        &lt;c:set scope=&quot;request&quot; var=&quot;name&quot; value=&quot;zhangsan&quot; /&gt;
+        通过JSTL标签添加的作用域中的值：${requestScope.name}   &lt;br&gt;
+        &lt;c:set scope=&quot;application&quot; var=&quot;name&quot; value=&quot;lisi&quot; /&gt;
+        通过JSTL标签添加的作用域中的值：${applicationScope.name}   &lt;br&gt;
+        &lt;c:set scope=&quot;request&quot; var=&quot;name&quot; value=&quot;wangwu&quot; /&gt;
+        通过JSTL标签添加的作用域中的值：${requestScope.name}   &lt;br&gt;
+        &lt;c:set scope=&quot;page&quot; var=&quot;name&quot; value=&quot;zhaoliu&quot; /&gt;
+        通过JSTL标签添加的作用域中的值：${pageScope.name}   &lt;br&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_2-c-if" tabindex="-1"><a class="header-anchor" href="#_2-c-if" aria-hidden="true">#</a> （2）&lt;c:if &gt;</h4><p>控制哪些内容能够输出到响应体</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt; c:if &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;c:set scope=&quot;page&quot; var=&quot;age&quot; value=&quot;20&quot;/&gt;
+    &lt;br&gt;------------------------------使用java语言-------------------------------------&lt;br&gt;
+    &lt;%
+        if( Integer.parseInt((String)pageContext.getAttribute(&quot;age&quot;)) &gt;= 18 ){
+    %&gt;
+    输入：欢迎光临！
+    &lt;%  } else { %&gt;
+    输入：未满十八，不准入内！
+    &lt;%  }  %&gt;
+    &lt;br&gt;------------------------------使用JSTL标签-------------------------------------&lt;br&gt;
+
+    &lt;c:if test=&quot;${ age ge 18 }&quot;&gt;
+        输入：欢迎光临！
+    &lt;/c:if&gt;
+    &lt;c:if test=&quot;${ age lt 18 }&quot;&gt;
+        输入：未满十八，不准入内！
+    &lt;/c:if&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_3-c-choose" tabindex="-1"><a class="header-anchor" href="#_3-c-choose" aria-hidden="true">#</a> （3）&lt;c:choose&gt;</h4><p>在jsp中进行多分支判断，决定哪个内容写入响应体</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt; c:choose &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;c:set scope=&quot;page&quot; var=&quot;age&quot; value=&quot;6&quot;/&gt;
+    &lt;br&gt;------------------------------使用java语言-------------------------------------&lt;br&gt;
+    &lt;%
+        if( Integer.parseInt((String)pageContext.getAttribute(&quot;age&quot;)) == 18 ){
+    %&gt;
+    输入：您今年成年了
+    &lt;%  } else if( Integer.parseInt((String)pageContext.getAttribute(&quot;age&quot;)) &gt; 18 ){ %&gt;
+    输入：您已经成年了
+    &lt;%  }  else {%&gt;
+    输出：您还是个孩子
+    &lt;% } %&gt;
+    &lt;br&gt;------------------------------使用JSTL标签-------------------------------------&lt;br&gt;
+
+    &lt;c:choose&gt;
+        &lt;c:when test=&quot;${age eq 18}&quot;&gt;
+            输入：您今年成年了
+        &lt;/c:when&gt;
+        &lt;c:when test=&quot;${age gt 18}&quot;&gt;
+            输入：您已经成年了
+        &lt;/c:when&gt;
+        &lt;c:otherwise&gt;
+            输入：您还是个孩子
+        &lt;/c:otherwise&gt;
+    &lt;/c:choose&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="_4-c-foreach" tabindex="-1"><a class="header-anchor" href="#_4-c-foreach" aria-hidden="true">#</a> （4）&lt;c:forEach&gt;</h4><p>循环遍历</p><p>使用方式</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;c:forEach var=&quot;申明循环变量的名称&quot; begin=&quot;初始化循环变量&quot; 
+           end=&quot;循环变量可以接受的最大值&quot; step=&quot;循环变量的递增或递减值&quot;&gt;
+    *** step属性可以不写，默认递增1
+    *** 循环变量默认保存在pageContext中
+&lt;/c:forEach&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>例子</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page import=&quot;com.zn.Student&quot; %&gt;
+&lt;%@ page import=&quot;java.util.List&quot; %&gt;
+&lt;%@ page import=&quot;java.util.ArrayList&quot; %&gt;
+&lt;%@ page import=&quot;java.util.Map&quot; %&gt;
+&lt;%@ page import=&quot;java.util.HashMap&quot; %&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt; c:forEach &lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;%
+        pageContext.setAttribute(&quot;students&quot;,new ArrayList(){{
+            add(new Student(&quot;s1&quot;,&quot;zhangsan&quot;,16));
+            add(new Student(&quot;s2&quot;,&quot;lisi&quot;,19));
+            add(new Student(&quot;s3&quot;,&quot;wangwu&quot;,15));
+        }});
+        pageContext.setAttribute(&quot;stuMap&quot;, new HashMap(){{
+            put(&quot;m1&quot;,new Student(&quot;s1&quot;,&quot;zhangsan&quot;,16));
+            put(&quot;m2&quot;,new Student(&quot;s2&quot;,&quot;lisi&quot;,18));
+            put(&quot;m3&quot;,new Student(&quot;s3&quot;,&quot;wangwu&quot;,15));
+        }});
+    %&gt;
+    &lt;br&gt;------------------------使用java语言------------------------------&lt;br&gt;
+    &lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;学号&lt;/td&gt;&lt;td&gt;姓名&lt;/td&gt;&lt;td&gt;年龄&lt;/td&gt;&lt;/tr&gt;
+        &lt;%
+            List&lt;Student&gt; stus =            (ArrayList&lt;Student&gt;)pageContext.getAttribute(&quot;students&quot;);
+            for (int i = 0; i &lt; stus.size(); i++) {
+        %&gt;
+          &lt;tr&gt;&lt;td&gt;&lt;%=stus.get(i).getSid()%&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;%=stus.get(i).getName()%&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;%=stus.get(i).getAge()%&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;% } %&gt;
+    &lt;/table&gt;
+    
+    &lt;br&gt;----------------------使用JSTL标签读取list-----------------------&lt;br&gt;
+    &lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;学号&lt;/td&gt;&lt;td&gt;姓名&lt;/td&gt;&lt;td&gt;年龄&lt;/td&gt;&lt;/tr&gt;
+        &lt;c:forEach var=&quot;student&quot; items=&quot;${students}&quot;&gt;
+        &lt;tr&gt;&lt;td&gt;${student.sid}&lt;/td&gt;
+            &lt;td&gt;${student.name}&lt;/td&gt;
+            &lt;td&gt;${student.age}&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/c:forEach&gt;
+    &lt;/table&gt;
+
+    &lt;br&gt;---------------------使用JSTL标签读取map------------------------&lt;br&gt;
+    &lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;学号&lt;/td&gt;&lt;td&gt;姓名&lt;/td&gt;&lt;td&gt;年龄&lt;/td&gt;&lt;/tr&gt;
+        &lt;c:forEach var=&quot;student&quot; items=&quot;${stuMap}&quot;&gt;
+            &lt;tr&gt;
+                &lt;td&gt;${student.key}&lt;/td&gt;
+                &lt;td&gt;${student.value.sid}&lt;/td&gt;
+                &lt;td&gt;${student.value.name}&lt;/td&gt;
+                &lt;td&gt;${student.value.age}&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/c:forEach&gt;
+    &lt;/table&gt;
+
+    &lt;br&gt;--------------使用JSTL标签读取指定for循环-----------------------&lt;br&gt;
+    &lt;select&gt;
+      &lt;c:forEach var=&quot;item&quot; begin=&quot;1&quot; end=&quot;10&quot; step=&quot;1&quot;&gt;
+          &lt;option&gt; ${item} &lt;/option&gt;
+      &lt;/c:forEach&gt;
+    &lt;/select&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>其中使用的java对象：</p><div class="language-java ext-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">String</span> sid<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getSid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> sid<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSid</span><span class="token punctuation">(</span><span class="token class-name">String</span> sid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>sid <span class="token operator">=</span> sid<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> age<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAge</span><span class="token punctuation">(</span><span class="token keyword">int</span> age<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token class-name">String</span> sid<span class="token punctuation">,</span> <span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token keyword">int</span> age<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>sid <span class="token operator">=</span> sid<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_3-路径问题" tabindex="-1"><a class="header-anchor" href="#_3-路径问题" aria-hidden="true">#</a> 3-路径问题</h2><p>在我们表示一个资源的位置的时候通常有两种方式，一个是绝对路径，一个是相对路径，我们学习html的时候已经学习过，今天重新回顾一下。</p><ol><li><p>绝对路径：从根目录为起点到某一个目录的路径； /C://aa/bb/a.txt</p></li><li><p>相对路径：从一个目录为起点到另外一个的目录的路径。 ./b.txt b.txt</p></li></ol><p>​ 同样我们获取一个网络资源的时候，一样可以使用这两种方式，使用绝对路径也就是url，我们就不必重新说了，但是使用相对路径的时候，我们需要掌握以下两个知识点。</p><ol><li>站点的根目录：浏览器而言，它的根目录就是站点根目录，可能是你磁盘上的任意一个文件夹，此时一个urlhttp://localhost:9999/可以映射到这个文件夹，这就代表了一个站点的根目录。</li><li>项目的根目录：对于咱们的工程而言，服务端的根目录是项目根目录，其实在tomcat中，一个app就是一个独立的文件夹，相对于站点根目录，项目的根目录多了一个app的名字： <a href="http://localhost:9999/study01/%E3%80%82" target="_blank" rel="noopener noreferrer">http://localhost:9999/study01/。<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></li></ol><p><code>/</code>一般是指代某种情况下的根路径，在前端使用就指代站点根路径，在服务器中就是项目跟根路径。</p><p>所以一般情况下，</p><ul><li>绝对路径是以/开头或者使用整体的url。</li><li>【重要】如果是在浏览器中访问就是站点根目录，如果是在java项目代码中使用就指项目根目录。</li><li>相对路径使用<code>./</code>或者<code>../</code>或者文件名开头，其中<code>./</code>代表当前文件夹，<code>../</code>代表上级文件夹。</li></ul><p>以下几个场景中我们使用绝对路径需要注意：</p><p>1、在服务端进行请求转发，因为转发的过程在服务端进行，所以不需要加contextPath。</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>req.getRequestDispatcher(&quot;/WEB-INF/pages/error.jsp&quot;).forward(req,resp);
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>2、在服务端进行重定向，大家要明白一点，重定向其实是在浏览器中具体执行的，所以必须加contextPath。</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>response.sendRedirect(request.getContextPath() + &quot;/login.jsp&quot;);
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>3、在浏览器端访问一个新的地址。</p><div class="language-html ext-html line-numbers-mode"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>/first_web/pages/index.jsp<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>前往主页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>4、在浏览器中访问静态资源</p><div class="language-html ext-html line-numbers-mode"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>/first_web/static/js/index.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>以下是我们通常的处理方案：</p><p>1、在jsp中定义好我们的basePath，这个路径是带有contextPath的。</p><p>2、在Head中指定， <code>&lt;base href=&quot;&lt;%=basePath%&gt;&quot;&gt; </code>。</p><p>3、在具体的地址处使用相对于contextPath的路径。</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%
+   String path = request.getContextPath();
+   String basePath = request.getScheme()+&quot;://&quot;+request.getServerName()+&quot;:&quot;+request.getServerPort()+path+&quot;/&quot;;
+%&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;image调用&lt;/title&gt;
+   &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;   
+   &lt;base href=&quot;&lt;%=basePath%&gt;&quot;&gt; 
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h1&gt;图片访问&lt;/h1&gt;
+   &lt;div&gt;   
+     &lt;img alt=&quot;图片&quot; src=&quot;image/a.png&quot;&gt;
+   &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>以上结构中的图片真实的访问路径是： <a href="http://localhost:8080/first_web/image/a.png" target="_blank" rel="noopener noreferrer">http://localhost:8080/first_web/image/a.png<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a></p><h2 id="_4-错误页面和404页面" tabindex="-1"><a class="header-anchor" href="#_4-错误页面和404页面" aria-hidden="true">#</a> 4-错误页面和404页面</h2><p>我们可以在web.xml中根据错误码和异常类型，配置不同异常情况下的错误页面。</p><div class="language-jsp ext-jsp line-numbers-mode"><pre class="language-jsp"><code>&lt;error-page&gt;
+    &lt;error-code&gt;404&lt;/error-code&gt;
+    &lt;location&gt;/pages/404.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+
+&lt;error-page&gt;
+    &lt;exception-type&gt;java.lang.Exception&lt;/exception-type&gt;
+    &lt;location&gt;/pages/err.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><!----><footer class="page-meta"><div class="meta-item edit-link"><a href="https://github.com/vuepress-theme-hope/vuepress-theme-hope/edit/main/docs/pages/Java/JavaWeb/5-EL与JSTL.md" rel="noopener noreferrer" target="_blank" aria-label="在 GitHub 上编辑此页" class="nav-link label"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon edit-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="edit icon"><path d="M430.818 653.65a60.46 60.46 0 0 1-50.96-93.281l71.69-114.012 7.773-10.365L816.038 80.138A60.46 60.46 0 0 1 859.225 62a60.46 60.46 0 0 1 43.186 18.138l43.186 43.186a60.46 60.46 0 0 1 0 86.373L588.879 565.55l-8.637 8.637-117.466 68.234a60.46 60.46 0 0 1-31.958 11.229z"></path><path d="M728.802 962H252.891A190.883 190.883 0 0 1 62.008 771.98V296.934a190.883 190.883 0 0 1 190.883-192.61h267.754a60.46 60.46 0 0 1 0 120.92H252.891a69.962 69.962 0 0 0-69.098 69.099V771.98a69.962 69.962 0 0 0 69.098 69.098h475.911A69.962 69.962 0 0 0 797.9 771.98V503.363a60.46 60.46 0 1 1 120.922 0V771.98A190.883 190.883 0 0 1 728.802 962z"></path></svg><!--]-->在 GitHub 上编辑此页<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!----></a></div><!----><!----></footer><!----><div class="giscus-wrapper input-top" style="display:block;"><div style="text-align:center">Loading...</div></div><!----><!--]--></main><!--]--><footer class="footer-wrapper"><div class="footer">默认页脚</div><div class="copyright">Copyright © 2022 huluhutu</div></footer><!--]--></div><!--]--><!----><!----><!--]--></div>
+    <script type="module" src="/huluhutublog/assets/app.0662e65c.js" defer></script>
+  </body>
+</html>

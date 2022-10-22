@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.51" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <meta property="og:url" content="https://mister-hope.github.io/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html"><meta property="og:site_name" content="huluhutublog"><meta property="og:title" content="1 5种基础数据类型"><meta property="og:type" content="article"><meta property="og:updated_time" content="2022-10-06T10:31:37.000Z"><meta property="og:locale" content="zh-CN"><meta property="article:modified_time" content="2022-10-06T10:31:37.000Z"><link rel="icon" href="/huluhutublog/favicon.ico"><link rel="icon" href="/huluhutublog/assets/icon/chrome-mask-512.png" type="image/png" sizes="512x512"><link rel="icon" href="/huluhutublog/assets/icon/chrome-mask-192.png" type="image/png" sizes="192x192"><link rel="icon" href="/huluhutublog/assets/icon/chrome-512.png" type="image/png" sizes="512x512"><link rel="icon" href="/huluhutublog/assets/icon/chrome-192.png" type="image/png" sizes="192x192"><link rel="manifest" href="/huluhutublog/manifest.webmanifest" crossorigin="use-credentials"><meta name="theme-color" content="#46bd87"><link rel="apple-touch-icon" href="/huluhutublog/assets/icon/apple-icon-152.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="msapplication-TileImage" content="/huluhutublog/assets/icon/ms-icon-144.png"><meta name="msapplication-TileColor" content="#ffffff"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><title>1 5种基础数据类型 | huluhutublog</title><meta name="description" content="That is my Blog!!!">
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme="dark"] {
+        --bg-color: #1d2025;
+      }
+
+      html,
+      body {
+        background-color: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.querySelector("html").setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="stylesheet" href="/huluhutublog/assets/style.dc69c01e.css">
+    <link rel="modulepreload" href="/huluhutublog/assets/app.0662e65c.js"><link rel="modulepreload" href="/huluhutublog/assets/1-5种基础数据类型.html.55cec3b9.js"><link rel="modulepreload" href="/huluhutublog/assets/_plugin-vue_export-helper.cdc0426e.js"><link rel="modulepreload" href="/huluhutublog/assets/1-5种基础数据类型.html.b0e33c65.js">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="skip-link sr-only">Skip to content</a><!--]--><div class="theme-container has-toc"><!--[--><!--[--><header class="navbar"><div class="navbar-left"><button class="toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!----><a href="/huluhutublog/" class="brand"><img class="logo" src="/huluhutublog/logo.svg" alt="huluhutublog"><!----><span class="site-name hide-in-pad">huluhutublog</span></a><!----></div><div class="navbar-center"><!----><nav class="nav-links"><div class="nav-item hide-in-mobile"><a href="/huluhutublog/" class="nav-link" aria-label="HULUHUTU"><span class="icon iconfont icon-home"></span>HULUHUTU<!----></a></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="面试"><span class="title"><span class="icon iconfont icon-note"></span>面试</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Interviews/Java/" class="nav-link" aria-label="Java"><!---->Java<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="计算机基础"><span class="title"><span class="icon iconfont icon-note"></span>计算机基础</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/DataStructuresAndAlgorithms/" class="nav-link" aria-label="数据结构与算法"><!---->数据结构与算法<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/ComputerNetwork/" class="nav-link" aria-label="计算机网络"><!---->计算机网络<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/OperatingSystem/" class="nav-link" aria-label="操作系统"><!---->操作系统<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/PrinciplesOfComputerOrganization/" class="nav-link" aria-label="计算机组成原理"><!---->计算机组成原理<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/PrinciplesOfDatabase/" class="nav-link" aria-label="数据库原理"><!---->数据库原理<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/FundamentalsOfComputerScience/DesignPatterns/" class="nav-link" aria-label="设计模式"><!---->设计模式<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="Java"><span class="title"><span class="icon iconfont icon-note"></span>Java</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaBase/" class="nav-link" aria-label="Java基础"><!---->Java基础<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaIO/" class="nav-link" aria-label="JavaIO"><!---->JavaIO<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaCollection/" class="nav-link" aria-label="Java集合"><!---->Java集合<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JavaConcurrent/" class="nav-link" aria-label="Java并发编程"><!---->Java并发编程<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Java/JVM/JVM.html" class="nav-link" aria-label="JVM"><!---->JVM<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="数据库"><span class="title"><span class="icon iconfont icon-note"></span>数据库</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/DB/MySQL/" class="nav-link" aria-label="MySQL"><!---->MySQL<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DB/Redis/" class="nav-link active" aria-label="Redis"><!---->Redis<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="Spring"><span class="title"><span class="icon iconfont icon-note"></span>Spring</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/Spring/" class="nav-link" aria-label="Spring"><!---->Spring<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/SpringMVC/" class="nav-link" aria-label="SpringMVC"><!---->SpringMVC<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/SpringBoot/" class="nav-link" aria-label="SpringBoot"><!---->SpringBoot<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Spring/SpringCloud/" class="nav-link" aria-label="SpringCloud"><!---->SpringCloud<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="消息队列"><span class="title"><span class="icon iconfont icon-note"></span>消息队列</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/MQ/RabbitMQ/" class="nav-link" aria-label="RabbitMQ"><!---->RabbitMQ<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/MQ/RocketMQ/" class="nav-link" aria-label="RocketMQ"><!---->RocketMQ<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/MQ/Kafka/" class="nav-link" aria-label="Kafka"><!---->Kafka<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="分布式"><span class="title"><span class="icon iconfont icon-note"></span>分布式</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Distributed/Artritecture/" class="nav-link" aria-label="架构"><!---->架构<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/Distributed/Distributed/" class="nav-link" aria-label="分布式理论"><!---->分布式理论<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="开发工具"><span class="title"><span class="icon iconfont icon-note"></span>开发工具</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Git/" class="nav-link" aria-label="Git"><!---->Git<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Linux/" class="nav-link" aria-label="Linux"><!---->Linux<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Docker/" class="nav-link" aria-label="Docker"><!---->Docker<!----></a></li><li class="dropdown-item"><a href="/huluhutublog/pages/DevelopmentTools/Maven/" class="nav-link" aria-label="Maven"><!---->Maven<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="项目"><span class="title"><span class="icon iconfont icon-note"></span>项目</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Project/SwiftHome/" class="nav-link" aria-label="快捷到家"><!---->快捷到家<!----></a></li></ul></button></div></div><div class="nav-item hide-in-mobile"><div class="dropdown-wrapper"><button class="dropdown-title" type="button" aria-label="部署"><span class="title"><span class="icon iconfont icon-note"></span>部署</span><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a href="/huluhutublog/pages/Deploy/Blog/" class="nav-link" aria-label="vuepress"><!---->vuepress<!----></a></li></ul></button></div></div></nav><!----></div><div class="navbar-right"><!----><!----><div class="nav-item"><a class="repo-link" href="https://github.com/vuepress-theme-hope/vuepress-theme-hope" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><div class="nav-item hide-in-mobile"><button class="outlook-button" tabindex="-1" ariahidden="true"><svg xmlns="http://www.w3.org/2000/svg" class="icon outlook-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="outlook icon"><path d="M224 800c0 9.6 3.2 44.8 6.4 54.4 6.4 48-48 76.8-48 76.8s80 41.6 147.2 0 134.4-134.4 38.4-195.2c-22.4-12.8-41.6-19.2-57.6-19.2C259.2 716.8 227.2 761.6 224 800zM560 675.2l-32 51.2c-51.2 51.2-83.2 32-83.2 32 25.6 67.2 0 112-12.8 128 25.6 6.4 51.2 9.6 80 9.6 54.4 0 102.4-9.6 150.4-32l0 0c3.2 0 3.2-3.2 3.2-3.2 22.4-16 12.8-35.2 6.4-44.8-9.6-12.8-12.8-25.6-12.8-41.6 0-54.4 60.8-99.2 137.6-99.2 6.4 0 12.8 0 22.4 0 12.8 0 38.4 9.6 48-25.6 0-3.2 0-3.2 3.2-6.4 0-3.2 3.2-6.4 3.2-6.4 6.4-16 6.4-16 6.4-19.2 9.6-35.2 16-73.6 16-115.2 0-105.6-41.6-198.4-108.8-268.8C704 396.8 560 675.2 560 675.2zM224 419.2c0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 28.8-22.4 51.2-51.2 51.2C246.4 470.4 224 448 224 419.2zM320 284.8c0-22.4 19.2-41.6 41.6-41.6 22.4 0 41.6 19.2 41.6 41.6 0 22.4-19.2 41.6-41.6 41.6C339.2 326.4 320 307.2 320 284.8zM457.6 208c0-12.8 12.8-25.6 25.6-25.6 12.8 0 25.6 12.8 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6C470.4 233.6 457.6 220.8 457.6 208zM128 505.6C128 592 153.6 672 201.6 736c28.8-60.8 112-60.8 124.8-60.8-16-51.2 16-99.2 16-99.2l316.8-422.4c-48-19.2-99.2-32-150.4-32C297.6 118.4 128 291.2 128 505.6zM764.8 86.4c-22.4 19.2-390.4 518.4-390.4 518.4-22.4 28.8-12.8 76.8 22.4 99.2l9.6 6.4c35.2 22.4 80 12.8 99.2-25.6 0 0 6.4-12.8 9.6-19.2 54.4-105.6 275.2-524.8 288-553.6 6.4-19.2-3.2-32-19.2-32C777.6 76.8 771.2 80 764.8 86.4z"></path></svg><div class="outlook-dropdown"><!----></div></button></div><!----><!----><button class="toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span class="button-container"><span class="button-top"></span><span class="button-middle"></span><span class="button-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow left"></span></div><aside class="sidebar"><!--[--><!----><!--]--><ul class="sidebar-links"><li><section class="sidebar-group"><button class="sidebar-heading clickable"><span class="icon iconfont icon-note"></span><span class="title">MySQL</span><span class="arrow right"></span></button><!----></section></li><li><section class="sidebar-group"><button class="sidebar-heading clickable active"><span class="icon iconfont icon-note"></span><span class="title">Redis</span><span class="arrow down"></span></button><ul class="sidebar-links"><li><!--[--><a href="/huluhutublog/pages/DB/Redis/" class="nav-link sidebar-link sidebar-page" aria-label="Redis概览"><!---->Redis概览<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html" class="router-link-active router-link-exact-active nav-link active sidebar-link sidebar-page active" aria-label="1 5种基础数据类型"><!---->1 5种基础数据类型<!----></a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-redis-key" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="1-Redis Key"><!---->1-Redis Key<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-string" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="2-String"><!---->2-String<!----></a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="1.简介"><!---->1.简介<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="2.常用命令"><!---->2.常用命令<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="3.数据结构"><!---->3.数据结构<!----></a><ul class="sidebar-sub-headers"></ul></li></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-list" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="3-List"><!---->3-List<!----></a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-1" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="1.简介"><!---->1.简介<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-1" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="2.常用命令"><!---->2.常用命令<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-1" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="3.数据结构"><!---->3.数据结构<!----></a><ul class="sidebar-sub-headers"></ul></li></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_4-set" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="4-Set"><!---->4-Set<!----></a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-2" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="1.简介"><!---->1.简介<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-2" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="2.常用命令"><!---->2.常用命令<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-2" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="3.数据结构"><!---->3.数据结构<!----></a><ul class="sidebar-sub-headers"></ul></li></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_5-hash" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="5-Hash"><!---->5-Hash<!----></a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-3" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="1.简介"><!---->1.简介<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-3" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="2.常用命令"><!---->2.常用命令<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-3" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="3.数据结构"><!---->3.数据结构<!----></a><ul class="sidebar-sub-headers"></ul></li></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_6-zset" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="6-Zset"><!---->6-Zset<!----></a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-4" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="1.简介"><!---->1.简介<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-4" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="2.常用命令"><!---->2.常用命令<!----></a><ul class="sidebar-sub-headers"></ul></li><li class="sidebar-sub-header"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-4" class="router-link-active router-link-exact-active nav-link sidebar-link heading" aria-label="3.数据结构"><!---->3.数据结构<!----></a><ul class="sidebar-sub-headers"></ul></li></ul></li></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/2-3%E7%A7%8D%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B.html" class="nav-link sidebar-link sidebar-page" aria-label="2 3种特殊类型"><!---->2 3种特殊类型<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/3-Redis%E4%BA%8B%E5%8A%A1%E6%93%8D%E4%BD%9C.html" class="nav-link sidebar-link sidebar-page" aria-label="3 Redis事务操作"><!---->3 Redis事务操作<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/4-RDB.html" class="nav-link sidebar-link sidebar-page" aria-label="4 RDB"><!---->4 RDB<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/5-AOF.html" class="nav-link sidebar-link sidebar-page" aria-label="5 AOF"><!---->5 AOF<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/6-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.html" class="nav-link sidebar-link sidebar-page" aria-label="6 主从复制"><!---->6 主从复制<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/7-%E9%9B%86%E7%BE%A4.html" class="nav-link sidebar-link sidebar-page" aria-label="7 集群"><!---->7 集群<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a href="/huluhutublog/pages/DB/Redis/8-%E5%BA%94%E7%94%A8%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html" class="nav-link sidebar-link sidebar-page" aria-label="8 应用问题及解决方案"><!---->8 应用问题及解决方案<!----></a><ul class="sidebar-sub-headers"></ul><!--]--></li></ul></section></li></ul><!--[--><!----><!--]--></aside><!--[--><main class="page" id="main-content"><!--[--><!----><nav class="breadcrumb disable"></nav><div class="page-title"><h1><!---->1 5种基础数据类型</h1><div class="page-info"><span class="author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="author-item" href="https://mrhope.site" target="_blank" rel="noopener noreferrer">huluhutu</a></span><span property="author" content="huluhutu"></span></span><!----><span class="date-info" aria-label="写作日期📅" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span>2022年10月6日</span><meta property="datePublished" content="2022-10-06T10:31:37.000Z"></span><!----><!----><span class="reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 34 分钟</span><meta property="timeRequired" content="PT34M"></span></div><hr></div><div class="toc-place-holder"><aside id="toc"><div class="toc-header">此页内容</div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-redis-key" class="router-link-active router-link-exact-active toc-link level2">1-Redis Key</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-string" class="router-link-active router-link-exact-active toc-link level2">2-String</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介" class="router-link-active router-link-exact-active toc-link level3">1.简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令" class="router-link-active router-link-exact-active toc-link level3">2.常用命令</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构" class="router-link-active router-link-exact-active toc-link level3">3.数据结构</a></li><!----><!--]--></ul><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-list" class="router-link-active router-link-exact-active toc-link level2">3-List</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-1" class="router-link-active router-link-exact-active toc-link level3">1.简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-1" class="router-link-active router-link-exact-active toc-link level3">2.常用命令</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-1" class="router-link-active router-link-exact-active toc-link level3">3.数据结构</a></li><!----><!--]--></ul><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_4-set" class="router-link-active router-link-exact-active toc-link level2">4-Set</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-2" class="router-link-active router-link-exact-active toc-link level3">1.简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-2" class="router-link-active router-link-exact-active toc-link level3">2.常用命令</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-2" class="router-link-active router-link-exact-active toc-link level3">3.数据结构</a></li><!----><!--]--></ul><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_5-hash" class="router-link-active router-link-exact-active toc-link level2">5-Hash</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-3" class="router-link-active router-link-exact-active toc-link level3">1.简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-3" class="router-link-active router-link-exact-active toc-link level3">2.常用命令</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-3" class="router-link-active router-link-exact-active toc-link level3">3.数据结构</a></li><!----><!--]--></ul><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_6-zset" class="router-link-active router-link-exact-active toc-link level2">6-Zset</a></li><ul class="toc-list"><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_1-简介-4" class="router-link-active router-link-exact-active toc-link level3">1.简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_2-常用命令-4" class="router-link-active router-link-exact-active toc-link level3">2.常用命令</a></li><!----><!--]--><!--[--><li class="toc-item"><a aria-current="page" href="/huluhutublog/pages/DB/Redis/1-5%E7%A7%8D%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html#_3-数据结构-4" class="router-link-active router-link-exact-active toc-link level3">3.数据结构</a></li><!----><!--]--></ul><!--]--></ul></div></aside></div><!----><div class="theme-hope-content"><h1 id="_1-5种基础数据类型" tabindex="-1"><a class="header-anchor" href="#_1-5种基础数据类型" aria-hidden="true">#</a> 1 5种基础数据类型</h1><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20221001192123941.png" alt="image-20221001192123941" loading="lazy"></p><h2 id="_1-redis-key" tabindex="-1"><a class="header-anchor" href="#_1-redis-key" aria-hidden="true">#</a> 1-Redis Key</h2><table><thead><tr><th>命令</th><th>作用</th></tr></thead><tbody><tr><td>keys*</td><td>查看当前库所有的key</td></tr><tr><td>exist key</td><td>判断某个key是否存在</td></tr><tr><td>type key</td><td>查看当前key是什么类型</td></tr><tr><td>unlink key</td><td>根据value删除非阻塞删除，仅仅将keys从keyspace元数据中删除，真正的删除会在后续异步中操作。</td></tr><tr><td>expire key 10</td><td>为指定的key设置有效期10秒</td></tr><tr><td>ttl key</td><td>查看指定的key还有多少秒过期，-1：表示永不过期，-2：表示已过期</td></tr><tr><td>select dbindex</td><td>切换数据库【0-15】，默认为0</td></tr><tr><td>dbsize</td><td>查看当前数据库key的数量</td></tr><tr><td>flushdb</td><td>清空当前库</td></tr><tr><td>flushall</td><td>通杀全部库</td></tr></tbody></table><h2 id="_2-string" tabindex="-1"><a class="header-anchor" href="#_2-string" aria-hidden="true">#</a> 2-String</h2><h3 id="_1-简介" tabindex="-1"><a class="header-anchor" href="#_1-简介" aria-hidden="true">#</a> 1.简介</h3><p>String是Redis最基本的类型，你可以理解成与Memcached一模一样的类型，一个key对应一个value。</p><p><strong>String类型是二进制安全的</strong>。意味着Redis的string可以包含任何数据。比如jpg图片或者序列化的对象。</p><p>String类型是Redis最基本的数据类型，<strong>一个Redis中字符串value最多可以是512M</strong></p><h3 id="_2-常用命令" tabindex="-1"><a class="header-anchor" href="#_2-常用命令" aria-hidden="true">#</a> 2.常用命令</h3><h4 id="set-添加键值对" tabindex="-1"><a class="header-anchor" href="#set-添加键值对" aria-hidden="true">#</a> set：添加键值对</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set key value [EX seconds|PX milliseconds|EXAT timestamp|PXAT milliseconds-timestamp|KEEPTTL] [NX|XX] [GET]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul><li>NX：当数据库中key不存在时，可以将key-value添加到数据库</li><li>XX：当数据库中key存在时，可以将key-value添加数据库，与NX参数互斥</li><li>EX：key的超时秒数</li><li>PX：key的超时毫秒数，与EX互斥</li><li>value中若包含空格、特殊字符，需用双引号包裹</li></ul><h4 id="get-获取值" tabindex="-1"><a class="header-anchor" href="#get-获取值" aria-hidden="true">#</a> get：获取值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>get &lt;key&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set name ready
+OK
+127.0.0.1:6379&gt; get name
+&quot;ready&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="apend-追加值" tabindex="-1"><a class="header-anchor" href="#apend-追加值" aria-hidden="true">#</a> apend：追加值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>append &lt;key&gt; &lt;value&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将给定的value追加到原值的末尾。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>27.0.0.1:6379&gt; set k1 hello
+OK
+127.0.0.1:6379&gt; append k1 &quot; world&quot;
+(integer) 11
+127.0.0.1:6379&gt; get k1
+&quot;hello world&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="strlen-获取值的长度" tabindex="-1"><a class="header-anchor" href="#strlen-获取值的长度" aria-hidden="true">#</a> strlen：获取值的长度</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>strlen &lt;key&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set name ready
+OK
+127.0.0.1:6379&gt; strlen name
+(integer) 5
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="setnx-key不存在时-设置key的值" tabindex="-1"><a class="header-anchor" href="#setnx-key不存在时-设置key的值" aria-hidden="true">#</a> setnx：key不存在时，设置key的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>setnx &lt;key&gt; &lt;value&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; setnx site &quot;itsoku.com&quot; #site不存在，返回1，表示设置成功
+(integer) 1
+127.0.0.1:6379&gt; setnx site &quot;itsoku.com&quot; #再次通过setnx设置site，由于已经存在了，所以设置失败，返回0
+(integer) 0
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="incr-原子递增1" tabindex="-1"><a class="header-anchor" href="#incr-原子递增1" aria-hidden="true">#</a> incr：原子递增1</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>incr &lt;key&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将key中存储的值增1，只能对数字值操作，如果key不存在，则会新建一个，值为1</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; set age 30 #age值为30
+OK
+127.0.0.1:6379&gt; incr age #age增加1，返回31
+(integer) 31
+127.0.0.1:6379&gt; get age #获取age的值
+&quot;31&quot;
+127.0.0.1:6379&gt; incr salary #salary不存在，自动创建一个，值为1
+(integer) 1
+127.0.0.1:6379&gt; get salary #获取salary的值
+&quot;1&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="decr-原子递减1" tabindex="-1"><a class="header-anchor" href="#decr-原子递减1" aria-hidden="true">#</a> decr：原子递减1</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>decr &lt;key&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将key中存储的值减1，只能对数字值操作，如果为空，新增值为-1</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; set age 30 #age值为30
+OK
+127.0.0.1:6379&gt; decr age #age递减1，返回29
+(integer) 29
+127.0.0.1:6379&gt; get age #获取age的值
+&quot;29&quot;
+127.0.0.1:6379&gt; decr salary #salary不存在，自动创建一个，值为-1
+(integer) -1
+127.0.0.1:6379&gt; get salary #获取salary
+&quot;-1&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="incrby-decrby-递增或者递减指定的数字" tabindex="-1"><a class="header-anchor" href="#incrby-decrby-递增或者递减指定的数字" aria-hidden="true">#</a> incrby/decrby：递增或者递减指定的数字</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>incrby/decrby &lt;key&gt; &lt;步长&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将key中存储的数字值递增指定的步长，若key不存在，则相当于在原值为0的值上递增指定的步长。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set salary 10000 #设置salary为10000
+OK
+127.0.0.1:6379&gt; incrby salary 5000 #salary添加5000，返回15000
+(integer) 15000
+127.0.0.1:6379&gt; get salary #获取salary
+&quot;15000&quot;
+127.0.0.1:6379&gt; decrby salary 800 #salary减去800，返回14200
+(integer) 14200
+127.0.0.1:6379&gt; get salary #获取salary
+&quot;14200&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="mset-同时设置多个key-value" tabindex="-1"><a class="header-anchor" href="#mset-同时设置多个key-value" aria-hidden="true">#</a> mset：同时设置多个key-value</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>mset &lt;key1&gt; &lt;value1&gt; &lt;key2&gt; &lt;value2&gt; ...
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; mset name ready age 30
+OK
+127.0.0.1:6379&gt; get name
+&quot;ready&quot;
+127.0.0.1:6379&gt; get age
+&quot;30&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="mget-获取多个key对应的值" tabindex="-1"><a class="header-anchor" href="#mget-获取多个key对应的值" aria-hidden="true">#</a> mget：获取多个key对应的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>mget &lt;key1&gt; &lt;key2&gt; ...
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; mset name ready age 30 #同时设置name和age
+OK
+127.0.0.1:6379&gt; mget name age #同时读取name和age的值
+1) &quot;ready&quot;
+2) &quot;30&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="msetnx-当多个key都不存在时-则设置成功" tabindex="-1"><a class="header-anchor" href="#msetnx-当多个key都不存在时-则设置成功" aria-hidden="true">#</a> msetnx：当多个key都不存在时，则设置成功</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>msetnx &lt;key1&gt; &lt;value1&gt; &lt;key2&gt; &lt;value2&gt; ...
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>原子性的，要么都成功，或者都失败。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; set k1 v1 #设置k1
+OK
+127.0.0.1:6379&gt; msetnx k1 v1 k2 v2 #当k1和k2都不存在的时候，同时设置k1和k2，由于k1已存在，所以这个操作失败
+(integer) 0
+127.0.0.1:6379&gt; mget k1 k2 #获取k1、k2，k2不存在
+1) &quot;v1&quot;
+2) (nil)
+127.0.0.1:6379&gt; msetnx k2 v2 k3 v3 #当k2、h3都不存在的时候，同时设置k2和k3，设置成功
+(integer) 1
+127.0.0.1:6379&gt; mget k1 k2 k3 #后去k1、k2、k3的值
+1) &quot;v1&quot;
+2) &quot;v2&quot;
+3) &quot;v3&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="getrange-获取值的范围-类似java中的substring" tabindex="-1"><a class="header-anchor" href="#getrange-获取值的范围-类似java中的substring" aria-hidden="true">#</a> getrange：获取值的范围，类似java中的substring</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>getrange key start end
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>获取[start,end]返回为的字符串</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set k1 helloworld
+OK
+127.0.0.1:6379&gt; getrange k1 0 4
+&quot;hello&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="setrange-覆盖指定位置的值" tabindex="-1"><a class="header-anchor" href="#setrange-覆盖指定位置的值" aria-hidden="true">#</a> setrange：覆盖指定位置的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>setrange &lt;key&gt; &lt;起始位置&gt; &lt;value&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set k1 helloworld
+OK
+127.0.0.1:6379&gt; getrange k1 0 4
+&quot;hello&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="setex-设置键值-过期时间-秒" tabindex="-1"><a class="header-anchor" href="#setex-设置键值-过期时间-秒" aria-hidden="true">#</a> setex：设置键值&amp;过期时间（秒）</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>setex &lt;key&gt; &lt;过期时间(秒)&gt; &lt;value&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; setex k1 100 v1 #设置k1的值为v1，有效期100秒
+OK
+127.0.0.1:6379&gt; get k1 #获取k1的值
+&quot;v1&quot;
+127.0.0.1:6379&gt; ttl k1 #获取k1还有多少秒失效
+(integer) 96
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="getset-以新换旧-设置新值同时返回旧值" tabindex="-1"><a class="header-anchor" href="#getset-以新换旧-设置新值同时返回旧值" aria-hidden="true">#</a> getset：以新换旧，设置新值同时返回旧值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set name ready #设置name为ready
+OK
+127.0.0.1:6379&gt; getset name tom #设置name为tom，返回name的旧值
+&quot;ready&quot;
+127.0.0.1:6379&gt; getset age 30 #设置age为30，age未设置过，返回age的旧值为null
+(nil)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-数据结构" tabindex="-1"><a class="header-anchor" href="#_3-数据结构" aria-hidden="true">#</a> 3.数据结构</h3><p>String的数据结构为简单动态字符串（Simple Dynamic String，缩写SDS）。是可以修改的字符串，内部结构上类似于Java的ArrayList，采用分配冗余空间的方式来减少内存的频繁分配。</p><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20221001185833447.png" alt="image-20221001185833447" loading="lazy"></p><p>如图所示，内部为当前字符串实际分配的空间capacity一般要高于实际字符串长度len。当字符串长度小于1M时，扩容都是加倍现有的空间，如果超过1M，扩容时一次会多扩容1M的空间。</p><h2 id="_3-list" tabindex="-1"><a class="header-anchor" href="#_3-list" aria-hidden="true">#</a> 3-List</h2><h3 id="_1-简介-1" tabindex="-1"><a class="header-anchor" href="#_1-简介-1" aria-hidden="true">#</a> 1.简介</h3><p>单键多值</p><p>redis列表是简单的字符串列表，按照插入顺序排序。</p><p>你可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p><p>它的底层实际上是使用双向链表实现的，对两端的操作性能很高，通过索引下标操作中间节点性能会较差。</p><h3 id="_2-常用命令-1" tabindex="-1"><a class="header-anchor" href="#_2-常用命令-1" aria-hidden="true">#</a> 2.常用命令</h3><h4 id="lpush-rpush-从左边或者右边插入一个或多个值" tabindex="-1"><a class="header-anchor" href="#lpush-rpush-从左边或者右边插入一个或多个值" aria-hidden="true">#</a> lpush/rpush：从左边或者右边插入一个或多个值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>lpush/rpush &lt;key1&gt; &lt;value1&gt; &lt;key2&gt; &lt;value2&gt; ...
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; rpush name java spring &quot;springboot&quot; &quot;spring cloud&quot; #列表name的左边插入4个元素
+(integer) 4
+127.0.0.1:6379&gt; lrange name 1 2 #从左边取出索引位于[1,2]范围内的元素
+1) &quot;spring&quot;
+2) &quot;springboot&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="lrange-从列表左边获取指定范围内的值" tabindex="-1"><a class="header-anchor" href="#lrange-从列表左边获取指定范围内的值" aria-hidden="true">#</a> lrange：从列表左边获取指定范围内的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>lrange &lt;key&gt; &lt;star&gt; &lt;stop&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回列表 <code>key</code> 中指定区间内的元素，区间以偏移量 <code>start</code> 和 <code>stop</code> 指定。</p><p>下标(index)参数 <code>start</code> 和 <code>stop</code> 都以 <code>0</code> 为底，也就是说，以 <code>0</code> 表示列表的第一个元素，以 <code>1</code> 表示列表的第二个元素，以此类推。</p><p>你也可以使用负数下标，以 <code>-1</code> 表示列表的最后一个元素， <code>-2</code> 表示列表的倒数第二个元素，以此类推。</p><p><strong>返回值:</strong></p><p>一个列表，包含指定区间内的元素。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; rpush course java c c++ php js nodejs #course集合的右边插入6个元素
+(integer) 6
+127.0.0.1:6379&gt; lrange course 0 -1 #取出course集合中所有元素
+1) &quot;java&quot;
+2) &quot;c&quot;
+3) &quot;c++&quot;
+4) &quot;php&quot;
+5) &quot;js&quot;
+6) &quot;nodejs&quot;
+127.0.0.1:6379&gt; lrange course 1 3 #获取course集合索引[1,3]范围内的元素
+1) &quot;c&quot;
+2) &quot;c++&quot;
+3) &quot;php&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="lpop-rpop-从左边或者右边弹出多个元素" tabindex="-1"><a class="header-anchor" href="#lpop-rpop-从左边或者右边弹出多个元素" aria-hidden="true">#</a> lpop/rpop：从左边或者右边弹出多个元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>lpop/rpop &lt;key&gt; &lt;count&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>count：可以省略，默认值为1</p><p>lpop/rpop 操作之后，弹出来的值会从列表中删除</p><p>值在键在，值光键亡。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; rpush course java c++ php js node js #集合course右边加入6个元素
+(integer) 6
+127.0.0.1:6379&gt; lpop course #从左边弹出1个元素
+&quot;java&quot;
+127.0.0.1:6379&gt; rpop course 2 #从右边弹出2个元素
+1) &quot;js&quot;
+2) &quot;node&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="rpoplpush-从一个列表右边弹出一个元素放到另外一个列表中" tabindex="-1"><a class="header-anchor" href="#rpoplpush-从一个列表右边弹出一个元素放到另外一个列表中" aria-hidden="true">#</a> rpoplpush：从一个列表右边弹出一个元素放到另外一个列表中</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>rpoplpush source destination
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>从source的右边弹出一个元素放到destination列表的左边</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; rpush k1 1 2 3 #列表k1的右边添加3个元素[1,2,3]
+(integer) 3
+127.0.0.1:6379&gt; lrange k1 0 -1 #从左到右输出k1列表中的元素
+1) &quot;1&quot;
+2) &quot;2&quot;
+3) &quot;3&quot;
+127.0.0.1:6379&gt; rpush k2 4 5 6 #列表k2的右边添加3个元素[4,5,6]
+(integer) 3
+127.0.0.1:6379&gt; lrange k2 0 -1 #从左到右输出k2列表中的元素
+1) &quot;4&quot;
+2) &quot;5&quot;
+3) &quot;6&quot;
+127.0.0.1:6379&gt; rpoplpush k1 k2 #从k1的右边弹出一个元素放到k2的左边
+&quot;3&quot;
+127.0.0.1:6379&gt; lrange k1 0 -1 #k1中剩下2个元素了
+1) &quot;1&quot;
+2) &quot;2&quot;
+127.0.0.1:6379&gt; lrange k2 0 -1 #k2中变成4个元素了
+1) &quot;3&quot;
+2) &quot;4&quot;
+3) &quot;5&quot;
+4) &quot;6&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="lindex-获取指定索引位置的元素-从左到右" tabindex="-1"><a class="header-anchor" href="#lindex-获取指定索引位置的元素-从左到右" aria-hidden="true">#</a> lindex：获取指定索引位置的元素（从左到右）</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>lindex key index
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回列表 <code>key</code> 中，下标为 <code>index</code> 的元素。</p><p>下标(index)参数 <code>start</code> 和 <code>stop</code> 都以 <code>0</code> 为底，也就是说，以 <code>0</code> 表示列表的第一个元素，以 <code>1</code> 表示列表的第二个元素，以此类推。</p><p>你也可以使用负数下标，以 <code>-1</code> 表示列表的最后一个元素， <code>-2</code> 表示列表的倒数第二个元素，以此类推。</p><p>如果 <code>key</code> 不是列表类型，返回一个错误。</p><p><strong>返回值:</strong></p><p>列表中下标为 <code>index</code> 的元素。</p><p>如果 <code>index</code> 参数的值不在列表的区间范围内(out of range)，返回 <code>nil</code></p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; rpush course java c c++ php #列表course中放入4个元素
+(integer) 4
+127.0.0.1:6379&gt; lindex course 2 #返回索引位置2的元素
+&quot;c++&quot;
+127.0.0.1:6379&gt; lindex course 200 #返回索引位置200的元素，没有
+(nil)
+127.0.0.1:6379&gt; lindex course -1 #返回最后一个元素
+&quot;php&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="llen-获得列表长度" tabindex="-1"><a class="header-anchor" href="#llen-获得列表长度" aria-hidden="true">#</a> llen：获得列表长度</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>llen key
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回列表 <code>key</code> 的长度。</p><p>如果 <code>key</code> 不存在，则 <code>key</code> 被解释为一个空列表，返回 <code>0</code> .</p><p>如果 <code>key</code> 不是列表类型，返回一个错误。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; rpush name ready tom jack
+(integer) 3
+127.0.0.1:6379&gt; llen name
+(integer) 3
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="linsert-在某个值的前或者后面插入一个值" tabindex="-1"><a class="header-anchor" href="#linsert-在某个值的前或者后面插入一个值" aria-hidden="true">#</a> linsert：在某个值的前或者后面插入一个值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>linsert &lt;key&gt; before|after &lt;value&gt; &lt;newvalue&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将值 <code>newvalue</code> 插入到列表 <code>key</code> 当中，位于值 <code>value</code>之前或之后。</p><p>当 <code>value</code> 不存在于列表 <code>key</code> 时，不执行任何操作。</p><p>当 <code>key</code> 不存在时， <code>key</code> 被视为空列表，不执行任何操作。</p><p>如果 <code>key</code> 不是列表类型，返回一个错误。</p><p><strong>返回值:</strong></p><p>如果命令执行成功，返回插入操作完成之后，列表的长度。</p><p>如果没有找到 <code>value</code> ，返回 <code>-1</code> 。</p><p>如果 <code>key</code> 不存在或为空列表，返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; rpush name ready tom jack #列表name中添加3个元素
+(integer) 3
+127.0.0.1:6379&gt; lrange name 0 -1 #name列表所有元素
+1) &quot;ready&quot;
+2) &quot;tom&quot;
+3) &quot;jack&quot;
+127.0.0.1:6379&gt; linsert name before tom lily #tom前面添加lily
+(integer) 4
+127.0.0.1:6379&gt; lrange name 0 -1 #name列表所有元素
+1) &quot;ready&quot;
+2) &quot;lily&quot;
+3) &quot;tom&quot;
+4) &quot;jack&quot;
+127.0.0.1:6379&gt; linsert name before xxx lucy # 在元素xxx前面插入lucy，由于xxx元素不存在，插入失败，返回-1
+(integer) -1
+127.0.0.1:6379&gt; lrange name 0 -1
+1) &quot;ready&quot;
+2) &quot;lily&quot;
+3) &quot;tom&quot;
+4) &quot;jack&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="lrem-删除指定数量的某个元素" tabindex="-1"><a class="header-anchor" href="#lrem-删除指定数量的某个元素" aria-hidden="true">#</a> lrem：删除指定数量的某个元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>LREM key count value
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>根据参数 <code>count</code> 的值，移除列表中与参数 <code>value</code> 相等的元素。</p><p><code>count</code> 的值可以是以下几种：</p><ul><li><code>count &gt; 0</code> : 从表头开始向表尾搜索，移除与 <code>value</code> 相等的元素，数量为 <code>count</code> 。</li><li><code>count &lt; 0</code> : 从表尾开始向表头搜索，移除与 <code>value</code> 相等的元素，数量为 <code>count</code> 的绝对值。</li><li><code>count = 0</code> : 移除表中所有与 <code>value</code> 相等的值。</li></ul><p><strong>返回值：</strong></p><p>被移除元素的数量。</p><p>因为不存在的 <code>key</code> 被视作空表(empty list)，所以当 <code>key</code> 不存在时，总是返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; rpush k1 v1 v2 v3 v2 v2 v1 #k1列表中插入6个元素
+(integer) 6
+127.0.0.1:6379&gt; lrange k1 0 -1 #输出k1集合中所有元素
+1) &quot;v1&quot;
+2) &quot;v2&quot;
+3) &quot;v3&quot;
+4) &quot;v2&quot;
+5) &quot;v2&quot;
+6) &quot;v1&quot;
+127.0.0.1:6379&gt; lrem k1 2 v2 #k1集合中从左边删除2个v2
+(integer) 2
+127.0.0.1:6379&gt; lrange k1 0 -1 #输出列表，列表中还有1个v2，前面2个v2干掉了
+1) &quot;v1&quot;
+2) &quot;v3&quot;
+3) &quot;v2&quot;
+4) &quot;v1&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="lset-替换指定位置的值" tabindex="-1"><a class="header-anchor" href="#lset-替换指定位置的值" aria-hidden="true">#</a> lset：替换指定位置的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>lset &lt;key&gt; &lt;index&gt; &lt;value&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将列表 <code>key</code> 下标为 <code>index</code> 的元素的值设置为 <code>value</code> 。</p><p>当 <code>index</code> 参数超出范围，或对一个空列表( <code>key</code> 不存在)进行lset时，返回一个错误。</p><p><strong>返回值：</strong></p><p>操作成功返回 <code>ok</code> ，否则返回错误信息。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; rpush name tom jack ready #name集合中放入3个元素
+(integer) 3
+127.0.0.1:6379&gt; lrange name 0 -1 #输出name集合元素
+1) &quot;tom&quot;
+2) &quot;jack&quot;
+3) &quot;ready&quot;
+127.0.0.1:6379&gt; lset name 1 lily #将name集合中第2个元素替换为liy
+OK
+127.0.0.1:6379&gt; lrange name 0 -1 #输出name集合元素
+1) &quot;tom&quot;
+2) &quot;lily&quot;
+3) &quot;ready&quot;
+127.0.0.1:6379&gt; lset name 10 lily #索引超出范围，报错
+(error) ERR index out of range
+127.0.0.1:6379&gt; lset course 1 java #course集合不存在，报错
+(error) ERR no such key
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-数据结构-1" tabindex="-1"><a class="header-anchor" href="#_3-数据结构-1" aria-hidden="true">#</a> 3.数据结构</h3><p>List的数据结构为快速链表quickList</p><p>首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是ziplist，也就是压缩列表。</p><p>它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</p><p>当就比较多的时候才会改成quickList。</p><p>因为普通的链表需要的附加指针空间太大，会比较浪费空间，比如这个列表里存储的只是int类型的书，结构上还需要2个额外的指针prev和next。</p><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20221001190136434.png" alt="image-20221001190136434" loading="lazy"></p><p>redis将链表和ziplist结合起来组成了quicklist。也就是将多个ziplist使用双向指针串起来使用，这样既满足了快速的插入删除性能，又不会出现太大的空间冗余。</p><h2 id="_4-set" tabindex="-1"><a class="header-anchor" href="#_4-set" aria-hidden="true">#</a> 4-Set</h2><h3 id="_1-简介-2" tabindex="-1"><a class="header-anchor" href="#_1-简介-2" aria-hidden="true">#</a> 1.简介</h3><p>redis set对外提供的功与list类似，是一个列表的功能，特殊之处在于set是可以自动排重的，当你需要存储一个列表数据，又不希望出现重复数据时，set是一个很好的选择。</p><p>redis的set是string类型的<strong>无序集合</strong>，他的<strong>底层实际是一个value为null的hash表</strong>，收益添加，删除，查找复杂度都是O(1)。</p><p>一个算法，如果时间复杂度是O(1)，那么随着数据的增加，查找数据的时间不变，也就是不管数据多少，查找时间都是一样</p><h3 id="_2-常用命令-2" tabindex="-1"><a class="header-anchor" href="#_2-常用命令-2" aria-hidden="true">#</a> 2.常用命令</h3><h4 id="sadd-添加一个或多个元素" tabindex="-1"><a class="header-anchor" href="#sadd-添加一个或多个元素" aria-hidden="true">#</a> sadd：添加一个或多个元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sadd &lt;key&gt; &lt;value1&gt; &lt;value2&gt; ...
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd k1 v1 v2 v1 v3 v2 #k1中放入5个元素，会自动去重，成功插入3个
+(integer) 3
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="smembers-取出所有元素" tabindex="-1"><a class="header-anchor" href="#smembers-取出所有元素" aria-hidden="true">#</a> smembers：取出所有元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>smembers &lt;key&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd k1 v1 v2 v1 v3 v2 #k1中放入5个元素，会自动去重，成功插入3个
+(integer) 3
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="sismember-判断集合中是否有某个值" tabindex="-1"><a class="header-anchor" href="#sismember-判断集合中是否有某个值" aria-hidden="true">#</a> sismember：判断集合中是否有某个值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sismember &lt;key&gt; &lt;value&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>判断集合key中是否包含元素value，1：有，0：没有</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd k1 v1 v2 v1 v3 v2 #k1中放入5个元素，会自动去重，成功插入3个
+(integer) 3
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="scard-返回集合中元素的个数" tabindex="-1"><a class="header-anchor" href="#scard-返回集合中元素的个数" aria-hidden="true">#</a> scard：返回集合中元素的个数</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>scard &lt;key&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回集合 <code>key</code> 的基数(集合中元素的数量)</p><p><strong>返回值：</strong></p><p>集合的基数。</p><p>当 <code>key</code> 不存在时，返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd k1 v1 v2 v1 v3 v2
+(integer) 3
+127.0.0.1:6379&gt; scard k1
+(integer) 3
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="srem-删除多个元素" tabindex="-1"><a class="header-anchor" href="#srem-删除多个元素" aria-hidden="true">#</a> srem：删除多个元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>srem key member [member ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>移除集合 <code>key</code> 中的一个或多个 <code>member</code> 元素，不存在的 <code>member</code> 元素会被忽略。</p><p>当 <code>key</code> 不是集合类型，返回一个错误。</p><p><strong>返回值:</strong></p><p>被成功移除的元素的数量，不包括被忽略的元素。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方测试
+OK
+127.0.0.1:6379&gt; sadd course java c c++ python #集合course中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; smembers course #获取course集合所有元素
+1) &quot;python&quot;
+2) &quot;java&quot;
+3) &quot;c++&quot;
+4) &quot;c&quot;
+127.0.0.1:6379&gt; srem course java c #删除course集合中的java和c
+(integer) 2
+127.0.0.1:6379&gt; smembers course #获取course集合所有元素，剩下2个了
+1) &quot;python&quot;
+2) &quot;c++&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="spop-随机弹出多个值" tabindex="-1"><a class="header-anchor" href="#spop-随机弹出多个值" aria-hidden="true">#</a> spop：随机弹出多个值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>spop &lt;key&gt; &lt;count&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>随机从key集合中弹出count个元素，count默认值为1</p><p><strong>返回值:</strong></p><p>被移除的随机元素。</p><p>当 <code>key</code> 不存在或 <code>key</code> 是空集时，返回 <code>nil</code></p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd course java c c++ python #course集合中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; smembers course #获取course集合中所有元素
+1) &quot;python&quot;
+2) &quot;java&quot;
+3) &quot;c++&quot;
+4) &quot;c&quot;
+127.0.0.1:6379&gt; spop course #随机弹出1个元素，被弹出的元素会被删除
+&quot;c++&quot;
+127.0.0.1:6379&gt; spop course 2 #随机弹出2个元素
+1) &quot;java&quot;
+2) &quot;python&quot;
+127.0.0.1:6379&gt; smembers course #输出剩下的元素
+1) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="srandmember-随机获取多个元素-不会从集合中删除" tabindex="-1"><a class="header-anchor" href="#srandmember-随机获取多个元素-不会从集合中删除" aria-hidden="true">#</a> srandmember：随机获取多个元素，不会从集合中删除</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>srandmember &lt;key&gt; &lt;count&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>从key指定的集合中随机返回count个元素，count可以不指定，默认值是1。</p><p><strong>srandmember 和 spop的区别：</strong></p><p>都可以随机获取多个元素，srandmember 不会删除元素，而spop会删除元素。</p><p><strong>返回值:</strong></p><p>只提供 <code>key</code> 参数时，返回一个元素；如果集合为空，返回 <code>nil</code> 。</p><p>如果提供了 <code>count</code> 参数，那么返回一个数组；如果集合为空，返回空数组。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; sadd course java c c++ python #course中放入5个元素
+(integer) 4
+127.0.0.1:6379&gt; smembers course #输出course集合中所有元素
+1) &quot;python&quot;
+2) &quot;java&quot;
+3) &quot;c++&quot;
+4) &quot;c&quot;
+127.0.0.1:6379&gt; srandmember course 3 #随机获取3个元素，元素并不会被删除
+1) &quot;python&quot;
+2) &quot;c++&quot;
+3) &quot;c&quot;
+127.0.0.1:6379&gt; smembers course #输出course集合中所有元素，元素个数未变
+1) &quot;python&quot;
+2) &quot;java&quot;
+3) &quot;c++&quot;
+4) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="smove-将某个原创从一个集合移动到另一个集合" tabindex="-1"><a class="header-anchor" href="#smove-将某个原创从一个集合移动到另一个集合" aria-hidden="true">#</a> smove：将某个原创从一个集合移动到另一个集合</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>smove &lt;source&gt; &lt;destination&gt; member
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将 <code>member</code> 元素从 <code>source</code> 集合移动到 <code>destination</code> 集合。</p><p>smove 是原子性操作。</p><p>如果 <code>source</code> 集合不存在或不包含指定的 <code>member</code> 元素，则 smove 命令不执行任何操作，仅返回 <code>0</code> 。否则， <code>member</code> 元素从 <code>source</code> 集合中被移除，并添加到 <code>destination</code> 集合中去。</p><p>当 <code>destination</code> 集合已经包含 <code>member</code> 元素时，smove 命令只是简单地将 <code>source</code> 集合中的 <code>member</code> 元素删除。</p><p>当 <code>source</code> 或 <code>destination</code> 不是集合类型时，返回一个错误。</p><p><strong>返回值:</strong></p><p>如果 <code>member</code> 元素被成功移除，返回 <code>1</code> 。</p><p>如果 <code>member</code> 元素不是 <code>source</code> 集合的成员，并且没有任何操作对 <code>destination</code> 集合执行，那么返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; sadd course1 java php js #集合course1中放入3个元素[java,php,js]
+(integer) 3
+127.0.0.1:6379&gt; sadd course2 c c++ #集合course2中放入2个元素[c,c++]
+(integer) 2
+127.0.0.1:6379&gt; smove course1 course2 js #将course1中的js移动到course2
+(integer) 1
+127.0.0.1:6379&gt; smembers course1 #输出course1中的元素
+1) &quot;java&quot;
+2) &quot;php&quot;
+127.0.0.1:6379&gt; smembers course2 #输出course2中的元素
+1) &quot;js&quot;
+2) &quot;c++&quot;
+3) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="sinter-取多个集合的交集" tabindex="-1"><a class="header-anchor" href="#sinter-取多个集合的交集" aria-hidden="true">#</a> sinter：取多个集合的交集</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sinter key [key ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; sadd course1 java php js #集合course1中放入3个元素[java,php,js]
+(integer) 3
+127.0.0.1:6379&gt; sadd course2 c c++ #集合course2中放入2个元素[c,c++]
+(integer) 2
+127.0.0.1:6379&gt; smove course1 course2 js #将course1中的js移动到course2
+(integer) 1
+127.0.0.1:6379&gt; smembers course1 #输出course1中的元素
+1) &quot;java&quot;
+2) &quot;php&quot;
+127.0.0.1:6379&gt; smembers course2 #输出course2中的元素
+1) &quot;js&quot;
+2) &quot;c++&quot;
+3) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="sinterstore-将多个集合的交集放到一个新的集合中" tabindex="-1"><a class="header-anchor" href="#sinterstore-将多个集合的交集放到一个新的集合中" aria-hidden="true">#</a> sinterstore：将多个集合的交集放到一个新的集合中</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sinterstore destination key [key ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>这个命令类似于<code>sinter</code>命令，但它将结果保存到 <code>destination</code> 集合，而不是简单地返回结果集。</p><p><strong>返回值:</strong></p><p>结果集中的成员数量。</p></blockquote><h4 id="sunion-取多个集合的并集-自动去重" tabindex="-1"><a class="header-anchor" href="#sunion-取多个集合的并集-自动去重" aria-hidden="true">#</a> sunion：取多个集合的并集，自动去重</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sunion key [key ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd course1 java php js #集合course1：[java,php,js]
+(integer) 3
+127.0.0.1:6379&gt; sadd course2 c c++ js #集合course2：[c,c++,js]
+(integer) 3
+127.0.0.1:6379&gt; sadd course3 js html #集合course3：[js,html]
+(integer) 2
+127.0.0.1:6379&gt; sunion course1 course2 course3 #返回3个集合的并集，会自动去重
+1) &quot;php&quot;
+2) &quot;js&quot;
+3) &quot;java&quot;
+4) &quot;html&quot;
+5) &quot;c++&quot;
+6) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="sunionstore-将多个集合的并集放到一个新的集合中" tabindex="-1"><a class="header-anchor" href="#sunionstore-将多个集合的并集放到一个新的集合中" aria-hidden="true">#</a> sunionstore：将多个集合的并集放到一个新的集合中</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sinterstore destination key [key ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>这个命令类似于 sunion 命令，但它将结果保存到 <code>destination</code> 集合，而不是简单地返回结果集。</p><p><strong>返回值:</strong></p><p>结果集中的成员数量。</p></blockquote><h4 id="sdiff-取多个集合的差集" tabindex="-1"><a class="header-anchor" href="#sdiff-取多个集合的差集" aria-hidden="true">#</a> sdiff：取多个集合的差集</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>SDIFF key [key ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回一个集合的全部成员，该集合是所有给定集合之间的差集。</p><p>不存在的 <code>key</code> 被视为空集。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb
+OK
+127.0.0.1:6379&gt; sadd course1 java php js #集合course1：[java,php,js]
+(integer) 3
+127.0.0.1:6379&gt; sadd course2 c c++ js #集合course2：[c,c++,js]
+(integer) 3
+127.0.0.1:6379&gt; sadd course3 js html #集合course3：[js,html]
+(integer) 2
+127.0.0.1:6379&gt; sunion course1 course2 course3 #返回3个集合的并集，会自动去重
+1) &quot;php&quot;
+2) &quot;js&quot;
+3) &quot;java&quot;
+4) &quot;html&quot;
+5) &quot;c++&quot;
+6) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="sdiffstore-将多个集合的差集放到一个新的集合中" tabindex="-1"><a class="header-anchor" href="#sdiffstore-将多个集合的差集放到一个新的集合中" aria-hidden="true">#</a> sdiffstore：将多个集合的差集放到一个新的集合中</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>sdiffstore destination key [key ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>这个命令类似于 sdiff 命令，但它将结果保存到 <code>destination</code> 集合，而不是简单地返回结果集。</p><p><strong>返回值:</strong></p><p>结果集中的成员数量。</p></blockquote><h3 id="_3-数据结构-2" tabindex="-1"><a class="header-anchor" href="#_3-数据结构-2" aria-hidden="true">#</a> 3.数据结构</h3><p>set数据结构是字典，字典是用hash表实现的。</p><p>Java中的HashSet的内部实现使用HashMap，只不过所有的value都指向同一个对象。</p><p>Redis的set结构也是一样的，它的内部也使用hash结构，所有的value都指向同一个内部值。</p><h2 id="_5-hash" tabindex="-1"><a class="header-anchor" href="#_5-hash" aria-hidden="true">#</a> 5-Hash</h2><h3 id="_1-简介-3" tabindex="-1"><a class="header-anchor" href="#_1-简介-3" aria-hidden="true">#</a> 1.简介</h3><p>Redis hash是一个键值对集合。</p><p>Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。</p><p>类似于java里面的Map&lt;String,Object&gt;</p><h3 id="_2-常用命令-3" tabindex="-1"><a class="header-anchor" href="#_2-常用命令-3" aria-hidden="true">#</a> 2.常用命令</h3><h4 id="hset-设置多个field的值" tabindex="-1"><a class="header-anchor" href="#hset-设置多个field的值" aria-hidden="true">#</a> hset：设置多个field的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hset key field value [field value ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将哈希表 <code>key</code> 中的域 <code>field</code> 的值设为 <code>value</code> 。</p><p>如果 <code>key</code> 不存在，一个新的哈希表被创建并进行 hset 操作。</p><p>如果域 <code>field</code> 已经存在于哈希表中，旧值将被覆盖。</p><p><strong>返回值：</strong></p><p>如果 <code>field</code> 是哈希表中的一个新建域，并且值设置成功，返回 <code>1</code> 。</p><p>如果哈希表中域 <code>field</code> 已经存在且旧值已被新值覆盖，返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hget-获取指定filed的值" tabindex="-1"><a class="header-anchor" href="#hget-获取指定filed的值" aria-hidden="true">#</a> hget：获取指定filed的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hget key field
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+127.0.0.1:6379&gt; hget user name #获取user中的name
+&quot;ready&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hgetall-返回hash表所有的域和值" tabindex="-1"><a class="header-anchor" href="#hgetall-返回hash表所有的域和值" aria-hidden="true">#</a> hgetall：返回hash表所有的域和值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hgetall key
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+127.0.0.1:6379&gt; hgetall user #获取user所有信息
+1) &quot;name&quot;
+2) &quot;ready&quot;
+3) &quot;age&quot;
+4) &quot;30&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hmset-和hset类似-已弃用" tabindex="-1"><a class="header-anchor" href="#hmset-和hset类似-已弃用" aria-hidden="true">#</a> hmset：和hset类似（已弃用）</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hmset key field value [field value ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h4 id="hexists-判断给定的field是否存在-1-存在-0-不存在" tabindex="-1"><a class="header-anchor" href="#hexists-判断给定的field是否存在-1-存在-0-不存在" aria-hidden="true">#</a> hexists：判断给定的field是否存在，1：存在，0：不存在</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hexists key field
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>查看哈希表 <code>key</code> 中，给定域 <code>field</code> 是否存在。</p><p><strong>返回值：</strong></p><p>如果哈希表含有给定域，返回 <code>1</code> 。</p><p>如果哈希表不含有给定域，或 <code>key</code> 不存在，返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+127.0.0.1:6379&gt; hexists user name #user中存在name域
+(integer) 1
+127.0.0.1:6379&gt; hexists user address #user中不存在address域，返回0
+(integer) 0
+127.0.0.1:6379&gt; hexists user1 address #user1这个key不存在，返回0
+(integer) 0
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hkeys-列出所有的filed" tabindex="-1"><a class="header-anchor" href="#hkeys-列出所有的filed" aria-hidden="true">#</a> hkeys：列出所有的filed</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hkeys key
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+127.0.0.1:6379&gt; hkeys user #获取user中的所有filed
+1) &quot;name&quot;
+2) &quot;age&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hvals-列出所有的value" tabindex="-1"><a class="header-anchor" href="#hvals-列出所有的value" aria-hidden="true">#</a> hvals：列出所有的value</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hvals key
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+127.0.0.1:6379&gt; hvals user #获取user中的所有filed的值列表
+1) &quot;ready&quot;
+2) &quot;30&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hlen-返回filed的数量" tabindex="-1"><a class="header-anchor" href="#hlen-返回filed的数量" aria-hidden="true">#</a> hlen：返回filed的数量</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>HLEN key
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回哈希表 <code>key</code> 中域的数量。</p><p><strong>返回值：</strong></p><p>哈希表中域的数量。</p><p>当 <code>key</code> 不存在时，返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #哈希表user中设置2个域：name和age，name的值为ready，age的值为30
+(integer) 2
+127.0.0.1:6379&gt; hlen user
+(integer) 2
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hincrby-filed的值加上指定的增量" tabindex="-1"><a class="header-anchor" href="#hincrby-filed的值加上指定的增量" aria-hidden="true">#</a> hincrby：filed的值加上指定的增量</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hincrby key field increment
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>为哈希表 key 中的域 field 的值加上增量 increment 。</p><p>增量也可以为负数，相当于对给定域进行减法操作。</p><p>如果 key 不存在，一个新的哈希表被创建并执行 HINCRBY 命令。</p><p>如果域 field 不存在，那么在执行命令前，域的值被初始化为 0 。</p><p>对一个储存字符串值的域 field 执行 HINCRBY 命令将造成一个错误。</p><p><strong>返回值：</strong></p><p>执行 hincrby 命令之后，哈希表 <code>key</code> 中域 <code>field</code> 的值。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset siteInfo site itsoku.com pv 1000 #hash表siteInfo中有2个域：{site:&quot;itsoku.com&quot;,pv:1000}
+(integer) 2
+127.0.0.1:6379&gt; hget siteInfo pv #获取siteInfo中pv的值
+&quot;1000&quot;
+127.0.0.1:6379&gt; hincrby siteInfo pv 10 #siteInfo中的pv值增加10
+(integer) 1010
+127.0.0.1:6379&gt; hget siteInfo pv #获取siteInfo中的pv
+&quot;1010&quot;
+127.0.0.1:6379&gt; hincrby siteInfo uv 500 #siteInfo中的uv值增加500，uv这个域不存在，则会先添加，然后再执行hincrby
+(integer) 500
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="hsetnx-当filed不存在的时候-设置filed的值" tabindex="-1"><a class="header-anchor" href="#hsetnx-当filed不存在的时候-设置filed的值" aria-hidden="true">#</a> hsetnx：当filed不存在的时候，设置filed的值</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>hsetnx key field value
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将哈希表 <code>key</code> 中的域 <code>field</code> 的值设置为 <code>value</code> ，当且仅当域 <code>field</code> 不存在。</p><p>若域 <code>field</code> 已经存在，该操作无效。</p><p>如果 <code>key</code> 不存在，一个新哈希表被创建并执行 hsetnx 命令。</p><p><strong>返回值：</strong></p><p>设置成功，返回 <code>1</code> 。</p><p>如果给定域已经存在且没有操作被执行，返回 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; hset user name ready age 30 #创建user，包含2个域：name、age
+(integer) 2
+127.0.0.1:6379&gt; hsetnx user name tom #name已存在，设置失败，返回0
+(integer) 0
+127.0.0.1:6379&gt; hget user name #name依旧是ready
+&quot;ready&quot;
+127.0.0.1:6379&gt; hsetnx user address shanghai #address不存在，设置成功
+(integer) 1
+127.0.0.1:6379&gt; hget user address #输出address的值
+&quot;shanghai&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-数据结构-3" tabindex="-1"><a class="header-anchor" href="#_3-数据结构-3" aria-hidden="true">#</a> 3.数据结构</h3><p>Hash类型对应的数据结构是2中：ziplist（压缩列表），hashtable（哈希表）。</p><p>当field-value长度较短个数较少时，使用ziplist，否则使用hashtable。</p><h2 id="_6-zset" tabindex="-1"><a class="header-anchor" href="#_6-zset" aria-hidden="true">#</a> 6-Zset</h2><h3 id="_1-简介-4" tabindex="-1"><a class="header-anchor" href="#_1-简介-4" aria-hidden="true">#</a> 1.简介</h3><p>redis有序集合zset与普通集合set非常相似，是一个没有重复元素的字符串集合。</p><p>不同之处是有序集合的每个成员都关联了一个评分（score），这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。</p><p>集合的成员是唯一的，但是评分是可以重复的。</p><p>因为元素是有序的，所以你可以很快的根据评分（score）或者次序（position）来获取一个范围的元素。</p><p>访问有序集合中的中间元素也是非常快的，因为你能够使用有序集合作为一个没有重复成员你的智能列表。</p><h3 id="_2-常用命令-4" tabindex="-1"><a class="header-anchor" href="#_2-常用命令-4" aria-hidden="true">#</a> 2.常用命令</h3><h4 id="zadd-添加元素" tabindex="-1"><a class="header-anchor" href="#zadd-添加元素" aria-hidden="true">#</a> zadd：添加元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zadd &lt;key&gt; &lt;score1&gt; &lt;member1&gt; &lt;score2&gt; &lt;member2&gt; ...
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>将一个或多个 <code>member</code> 元素及其 <code>score</code> 值加入到有序集 <code>key</code> 当中。</p><p>如果某个 <code>member</code> 已经是有序集的成员，那么更新这个 <code>member</code> 的 <code>score</code> 值，并通过重新插入这个 <code>member</code> 元素，来保证该 <code>member</code> 在正确的位置上。</p><p><code>score</code> 值可以是整数值或双精度浮点数。</p><p>如果 <code>key</code> 不存在，则创建一个空的有序集并执行 zadd 操作。</p><p>当 <code>key</code> 存在但不是有序集类型时，返回一个错误。</p><p><strong>返回值:</strong></p><p>被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topn 100 java 80 c 90 c++ 50 php 70 js #创建名称为topn的zset，添加了5个元素
+(integer) 5
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrange-score升序-获取指定索引范围的元素" tabindex="-1"><a class="header-anchor" href="#zrange-score升序-获取指定索引范围的元素" aria-hidden="true">#</a> zrange：score升序，获取指定索引范围的元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zrange key start top [withscores]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><ul><li><p>返回存储在有序集合<code>key</code>中的指定范围的元素。 返回的元素可以认为是按score从最低到最高排列，如果得分相同，将按字典排序。</p></li><li><p>下标参数 <code>start</code> 和 <code>stop</code> 都以 <code>0</code> 为底，也就是说，以 <code>0</code> 表示有序集第一个成员，以 <code>1</code> 表示有序集第二个成员，以此类推。</p><p>你也可以使用负数下标，以 <code>-1</code> 表示最后一个成员， <code>-2</code> 表示倒数第二个成员，以此类推。</p></li><li><p>zrange key 0 -1：可以获取所有元素</p></li><li><p>withscores：让成员和它的 <code>score</code> 值一并返回，返回列表以 <code>value1,score1, ..., valueN,scoreN</code> 的格式表示</p></li></ul><p><strong>可用版本：</strong></p><p>&gt;= 1.2.0</p><p><strong>时间复杂度:</strong></p><p>O(log(N)+M)， <code>N</code> 为有序集的基数，而 <code>M</code> 为结果集的基数。</p><p><strong>返回值:</strong></p><p>指定区间内，带有 <code>score</code> 值(可选)的有序集成员的列表。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topn 100 java 80 c 90 c++ 50 php 70 js #创建名称为topn的zset，添加了5个元素
+(integer) 5
+127.0.0.1:6379&gt; zrange topn 0 -1 #按score升序，返回topn中所有元素的值
+1) &quot;php&quot;
+2) &quot;js&quot;
+3) &quot;c&quot;
+4) &quot;c++&quot;
+5) &quot;java&quot;
+127.0.0.1:6379&gt; zrange topn 0 -1 withscores #按score升序，返回所有元素的值以及score
+ 1) &quot;php&quot;
+ 2) &quot;50&quot;
+ 3) &quot;js&quot;
+ 4) &quot;70&quot;
+ 5) &quot;c&quot;
+ 6) &quot;80&quot;
+ 7) &quot;c++&quot;
+ 8) &quot;90&quot;
+ 9) &quot;java&quot;
+10) &quot;100&quot;
+127.0.0.1:6379&gt; zrange topn 2 4 #返回索引范围[2,4]内的3个元素
+1) &quot;c&quot;
+2) &quot;c++&quot;
+3) &quot;java&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrevrange-score降序-获取指定索引范围的元素" tabindex="-1"><a class="header-anchor" href="#zrevrange-score降序-获取指定索引范围的元素" aria-hidden="true">#</a> zrevrange：score降序，获取指定索引范围的元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zrevrange key start stop [WITHSCORES]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><ul><li><p>返回存储在有序集合<code>key</code>中的指定范围的元素。 返回的元素可以认为是按score最高到最低排列， 如果得分相同，将按字典排序。</p></li><li><p>下标参数 <code>start</code> 和 <code>stop</code> 都以 <code>0</code> 为底，也就是说，以 <code>0</code> 表示有序集第一个成员，以 <code>1</code> 表示有序集第二个成员，以此类推。</p><p>你也可以使用负数下标，以 <code>-1</code> 表示最后一个成员， <code>-2</code> 表示倒数第二个成员，以此类推。</p></li><li><p>withscores：让成员和它的 <code>score</code> 值一并返回，返回列表以 <code>value1,score1, ..., valueN,scoreN</code> 的格式表示</p></li></ul></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topn 100 java 80 c 90 c++ 50 php 70 js #创建名称为topn的zset，添加了5个元素
+(integer) 5
+127.0.0.1:6379&gt; zrevrange topn 0 -1 #按照score降序获取所有元素
+1) &quot;java&quot;
+2) &quot;c++&quot;
+3) &quot;c&quot;
+4) &quot;js&quot;
+5) &quot;php&quot;
+127.0.0.1:6379&gt; zrevrange topn 0 2 #按照score降序获取前3名
+1) &quot;java&quot;
+2) &quot;c++&quot;
+3) &quot;c&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrangebyscore-按照score升序-返回指定score范围内的数据" tabindex="-1"><a class="header-anchor" href="#zrangebyscore-按照score升序-返回指定score范围内的数据" aria-hidden="true">#</a> zrangebyscore：按照score升序，返回指定score范围内的数据</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zrangebyscore key min max [WITHSCORES] [LIMIT offset count]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回有序集 <code>key</code> 中，所有 <code>score</code> 值介于 <code>min</code> 和 <code>max</code> 之间(包括等于 <code>min</code> 或 <code>max</code> )的成员。有序集成员按 <code>score</code> 值递增(从小到大)次序排列。</p><p>具有相同 <code>score</code> 值的成员按字典序来排列(该属性是有序集提供的，不需要额外的计算)。</p><p>可选的 <code>LIMIT</code> 参数指定返回结果的数量及区间(就像SQL中的 <code>SELECT LIMIT offset, count</code> )，注意当 <code>offset</code> 很大时，定位 <code>offset</code> 的操作可能需要遍历整个有序集，此过程最坏复杂度为 O(N) 时间。</p><p>可选的 <code>WITHSCORES</code> 参数决定结果集是单单返回有序集的成员，还是将有序集成员及其 <code>score</code> 值一起返回。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topn 100 java 80 c 90 c++ 50 php 70 js #创建名称为topn的zset，添加了5个元素
+(integer) 5
+127.0.0.1:6379&gt; zrangebyscore topn 70 90 #score升序，获取score位于[70,90]区间中的元素值
+1) &quot;js&quot;
+2) &quot;c&quot;
+3) &quot;c++&quot;
+127.0.0.1:6379&gt; zrangebyscore topn 70 90 withscores #score升序，获取score位于[70,90]区间中的元素值及score
+1) &quot;js&quot;
+2) &quot;70&quot;
+3) &quot;c&quot;
+4) &quot;80&quot;
+5) &quot;c++&quot;
+6) &quot;90&quot;
+127.0.0.1:6379&gt; zrangebyscore topn 70 90 withscores limit 1 2 #相当于：select value,score from topn集合 where score&gt;=70 and score&lt;=90 order by score asc limit 1,2
+1) &quot;c&quot;
+2) &quot;80&quot;
+3) &quot;c++&quot;
+4) &quot;90&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrevrangebyscore-按照score降序-返回指定score范围内的数据" tabindex="-1"><a class="header-anchor" href="#zrevrangebyscore-按照score降序-返回指定score范围内的数据" aria-hidden="true">#</a> zrevrangebyscore：按照score降序，返回指定score范围内的数据</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zrevrangebyscore key max min [WITHSCORES] [LIMIT offset count]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回有序集 <code>key</code> 中， <code>score</code> 值介于 <code>max</code> 和 <code>min</code> 之间(默认包括等于 <code>max</code> 或 <code>min</code> )的所有的成员。有序集成员按 <code>score</code> 值递减(从大到小)的次序排列。</p><p>具有相同 <code>score</code> 值的成员按字典序的逆序排列。</p><p>除了成员按 <code>score</code> 值递减的次序排列这一点外， zrevrangebyscore 命令的其他方面和 zrangebyscore 命令一样。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topn 100 java 80 c 90 c++ 50 php 70 js #创建名称为topn的zset，添加了5个元素
+(integer) 5
+127.0.0.1:6379&gt; zrevrangebyscore topn 100 90 #score降序，获取score位于[70,90]区间中的元素值
+1) &quot;java&quot;
+2) &quot;c++&quot;
+127.0.0.1:6379&gt; zrevrangebyscore topn 100 90 withscores #score降序，获取score位于[70,90]区间中的元素值及score
+1) &quot;java&quot;
+2) &quot;100&quot;
+3) &quot;c++&quot;
+4) &quot;90&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zincrby-为指定元素的score加上指定的增量" tabindex="-1"><a class="header-anchor" href="#zincrby-为指定元素的score加上指定的增量" aria-hidden="true">#</a> zincrby：为指定元素的score加上指定的增量</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zincrby key increment member
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>为有序集 <code>key</code> 的成员 <code>member</code> 的 <code>score</code> 值加上增量 <code>increment</code> 。</p><p>可以通过传递一个负数值 <code>increment</code> ，让 <code>score</code> 减去相应的值，比如 <code>ZINCRBY key -5 member</code> ，就是让 <code>member</code> 的 <code>score</code> 值减去 <code>5</code> 。</p><p>当 <code>key</code> 不存在，或 <code>member</code> 不是 <code>key</code> 的成员时， <code>ZINCRBY key increment member</code> 等同于 <code>ZADD key increment member</code> 。</p><p>当 <code>key</code> 不是有序集类型时，返回一个错误。</p><p><code>score</code> 值可以是整数值或双精度浮点数。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ #集合topx中添加3个元素：java、c、c++，对应的score分别是：90、70、80
+(integer) 3
+127.0.0.1:6379&gt; zrevrange topx 0 -1 withscores #输出集合topx中的元素，包含score
+1) &quot;java&quot;
+2) &quot;90&quot;
+3) &quot;c++&quot;
+4) &quot;80&quot;
+5) &quot;c&quot;
+6) &quot;70&quot;
+127.0.0.1:6379&gt; zincrby topx 5 java #对topx中的元素java的score加5，变成95了
+&quot;95&quot;
+127.0.0.1:6379&gt; zrevrange topx 0 -1 withscores # 输出集合元素，注意java的score是95了
+1) &quot;java&quot;
+2) &quot;95&quot;
+3) &quot;c++&quot;
+4) &quot;80&quot;
+5) &quot;c&quot;
+6) &quot;70&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrem-删除集合中多个元素" tabindex="-1"><a class="header-anchor" href="#zrem-删除集合中多个元素" aria-hidden="true">#</a> zrem：删除集合中多个元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zrem key member [member ...]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>移除有序集 <code>key</code> 中的一个或多个成员，不存在的成员将被忽略。</p><p>当 <code>key</code> 存在但不是有序集类型时，返回一个错误。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ #集合topx中添加3个元素：java、c、c++，对应的score分别是：90、70、80
+(integer) 3
+127.0.0.1:6379&gt; zrevrange topx 0 -1 withscores #输出集合topx中的元素，包含score
+1) &quot;java&quot;
+2) &quot;90&quot;
+3) &quot;c++&quot;
+4) &quot;80&quot;
+5) &quot;c&quot;
+6) &quot;70&quot;
+127.0.0.1:6379&gt; zincrby topx 5 java #对topx中的元素java的score加5，变成95了
+&quot;95&quot;
+127.0.0.1:6379&gt; zrevrange topx 0 -1 withscores # 输出集合元素，注意java的score是95了
+1) &quot;java&quot;
+2) &quot;95&quot;
+3) &quot;c++&quot;
+4) &quot;80&quot;
+5) &quot;c&quot;
+6) &quot;70&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zremrangebyrank-根据索引范围删除元素" tabindex="-1"><a class="header-anchor" href="#zremrangebyrank-根据索引范围删除元素" aria-hidden="true">#</a> zremrangebyrank：根据索引范围删除元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zremrangebyrank key start stop
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>移除有序集 <code>key</code> 中，指定排名(rank)区间内的所有成员。</p><p>区间分别以下标参数 <code>start</code> 和 <code>stop</code> 指出，包含 <code>start</code> 和 <code>stop</code> 在内。</p><p>下标参数 <code>start</code> 和 <code>stop</code> 都以 <code>0</code> 为底，也就是说，以 <code>0</code> 表示有序集第一个成员，以 <code>1</code> 表示有序集第二个成员，以此类推。</p><p>你也可以使用负数下标，以 <code>-1</code> 表示最后一个成员， <code>-2</code> 表示倒数第二个成员，以此类推。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ #集合topx中添加3个元素：java、c、c++，对应的score分别是：90、70、80
+(integer) 3
+127.0.0.1:6379&gt; zrange topx 0 -1 #输出集合topx中所有元素
+1) &quot;c&quot;
+2) &quot;c++&quot;
+3) &quot;java&quot;
+127.0.0.1:6379&gt; zremrangebyrank topx 0 1 #删除索引范围[0,1]的数据
+(integer) 2
+127.0.0.1:6379&gt; zrange topx 0 -1 #输出鞂topx中所有元素
+1) &quot;java&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zremrangebyscore-根据score的范围删除元素" tabindex="-1"><a class="header-anchor" href="#zremrangebyscore-根据score的范围删除元素" aria-hidden="true">#</a> zremrangebyscore：根据score的范围删除元素</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zremrangebyscore key min max
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>移除有序集 <code>key</code> 中，所有 <code>score</code> 值介于 <code>min</code> 和 <code>max</code> 之间(包括等于 <code>min</code> 或 <code>max</code> )的成员</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ 50 php #topx集合中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; zrange topx 0 -1 withscores #输出topx中所有元素值、score
+1) &quot;php&quot;
+2) &quot;50&quot;
+3) &quot;c&quot;
+4) &quot;70&quot;
+5) &quot;c++&quot;
+6) &quot;80&quot;
+7) &quot;java&quot;
+8) &quot;90&quot;
+127.0.0.1:6379&gt; zremrangebyscore topx 70 80 #删除score位于[70,80]区间的元素
+(integer) 2
+127.0.0.1:6379&gt; zrange topx 0 -1 withscores #输出剩下的元素
+1) &quot;php&quot;
+2) &quot;50&quot;
+3) &quot;java&quot;
+4) &quot;90&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zcount-统计指定score范围内元素的个数" tabindex="-1"><a class="header-anchor" href="#zcount-统计指定score范围内元素的个数" aria-hidden="true">#</a> zcount：统计指定score范围内元素的个数</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zcount key min max
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回有序集 <code>key</code> 中， <code>score</code> 值在 <code>min</code> 和 <code>max</code> 之间(默认包括 <code>score</code> 值等于 <code>min</code> 或 <code>max</code> )的成员的数量</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ 50 php #topx集合中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; zcount topx 80 100 #统计score位于[80,100]区间中的元素个数
+(integer) 2
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrank-按照score升序-返回某个元素在集合中的排名" tabindex="-1"><a class="header-anchor" href="#zrank-按照score升序-返回某个元素在集合中的排名" aria-hidden="true">#</a> zrank：按照score升序，返回某个元素在集合中的排名</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zrank key member
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回有序集 <code>key</code> 中成员 <code>member</code> 的排名。其中有序集成员按 <code>score</code> 值递增(从小到大)顺序排列。</p><p>排名以 <code>0</code> 为底，也就是说， <code>score</code> 值最小的成员排名为 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ 50 php #topx集合中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; zrank topx c #获取元素c的排名，返回1表示排名第2
+(integer) 1
+127.0.0.1:6379&gt; zrange topx 0 -1 #输出集合中所有元素，看一下c的位置确实是2
+1) &quot;php&quot;
+2) &quot;c&quot;
+3) &quot;c++&quot;
+4) &quot;java&quot;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zrevrank-按照score降序-返回某个元素在集合中的排名" tabindex="-1"><a class="header-anchor" href="#zrevrank-按照score降序-返回某个元素在集合中的排名" aria-hidden="true">#</a> zrevrank：按照score降序，返回某个元素在集合中的排名</h4><blockquote><p>返回有序集 <code>key</code> 中成员 <code>member</code> 的排名。其中有序集成员按 <code>score</code> 值递减(从大到小)排序。</p><p>排名以 <code>0</code> 为底，也就是说， <code>score</code> 值最大的成员排名为 <code>0</code> 。</p></blockquote><p>示例</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ 50 php #topx集合中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; zrange topx 0 -1
+1) &quot;php&quot;
+2) &quot;c&quot;
+3) &quot;c++&quot;
+4) &quot;java&quot;
+127.0.0.1:6379&gt; zrevrank topx java #score降序，得到java的排名，排在第1位
+(integer) 0
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="zscore-返回集合中指定元素的score" tabindex="-1"><a class="header-anchor" href="#zscore-返回集合中指定元素的score" aria-hidden="true">#</a> zscore：返回集合中指定元素的score</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>zscore key member
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><blockquote><p>返回有序集 <code>key</code> 中，成员 <code>member</code> 的 <code>score</code> 值。</p><p>如果 <code>member</code> 元素不是有序集 <code>key</code> 的成员，或 <code>key</code> 不存在，返回 <code>nil</code> 。</p></blockquote><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; flushdb #清空db，方便测试
+OK
+127.0.0.1:6379&gt; zadd topx 90 java 70 c 80 c++ 50 php #topx集合中添加4个元素
+(integer) 4
+127.0.0.1:6379&gt; zrange topx 0 -1
+1) &quot;php&quot;
+2) &quot;c&quot;
+3) &quot;c++&quot;
+4) &quot;java&quot;
+127.0.0.1:6379&gt; zrevrank topx java #score降序，得到java的排名，排在第1位
+(integer) 0
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-数据结构-4" tabindex="-1"><a class="header-anchor" href="#_3-数据结构-4" aria-hidden="true">#</a> 3.数据结构</h3><p>SortedSet（zset）是redis提供的一个非常特别的数据结构，内部使用到了2种数据结构。</p><p><strong>1、hash表</strong></p><p>类似于java中的Map&lt;String,score&gt;，key为集合中的元素，value为元素对应的score，可以用来快速定位元素定义的score，时间复杂度为O(1)</p><p><strong>2、跳表</strong></p><p>跳表（skiplist）是一个非常优秀的数据结构，实现简单，插入、删除、查找的复杂度均为O(logN)。</p><p>类似java中的ConcurrentSkipListSet，根据score的值排序后生成的一个跳表，可以快速按照位置的顺序或者score的顺序查询元素。</p><p>这里我们来看一下跳表的原理：</p><p>首先从考虑一个有序表开始：</p><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20221001190915080.png" alt="image-20221001190915080" loading="lazy"></p><p>从该有序表中搜索元素 &lt; 23, 43, 59 &gt; ，需要比较的次数分别为 &lt; 2, 4, 6 &gt;，总共比较的次数为 2 + 4 + 6 = 12 次。有没有优化的算法吗? 链表是有序的，但不能使用二分查找。类似二叉搜索树，我们把一些节点提取出来，作为索引。得到如下结构：</p><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20221001190923515.png" alt="image-20221001190923515" loading="lazy"></p><p>这里我们把 &lt; 14, 34, 50, 72 &gt; 提取出来作为一级索引，这样搜索的时候就可以减少比较次数了。我们还可以再从一级索引提取一些元素出来，作为二级索引，变成如下结构：</p><p><img src="https://raw.githubusercontent.com/huluhutu/blogimg/main/img/image-20221001190934062.png" alt="image-20221001190934062" loading="lazy"></p><p>这里元素不多，体现不出优势，如果元素足够多，这种索引结构就能体现出优势来了。</p></div><!----><footer class="page-meta"><div class="meta-item edit-link"><a href="https://github.com/vuepress-theme-hope/vuepress-theme-hope/edit/main/docs/pages/DB/Redis/1-5种基础数据类型.md" rel="noopener noreferrer" target="_blank" aria-label="在 GitHub 上编辑此页" class="nav-link label"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon edit-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="edit icon"><path d="M430.818 653.65a60.46 60.46 0 0 1-50.96-93.281l71.69-114.012 7.773-10.365L816.038 80.138A60.46 60.46 0 0 1 859.225 62a60.46 60.46 0 0 1 43.186 18.138l43.186 43.186a60.46 60.46 0 0 1 0 86.373L588.879 565.55l-8.637 8.637-117.466 68.234a60.46 60.46 0 0 1-31.958 11.229z"></path><path d="M728.802 962H252.891A190.883 190.883 0 0 1 62.008 771.98V296.934a190.883 190.883 0 0 1 190.883-192.61h267.754a60.46 60.46 0 0 1 0 120.92H252.891a69.962 69.962 0 0 0-69.098 69.099V771.98a69.962 69.962 0 0 0 69.098 69.098h475.911A69.962 69.962 0 0 0 797.9 771.98V503.363a60.46 60.46 0 1 1 120.922 0V771.98A190.883 190.883 0 0 1 728.802 962z"></path></svg><!--]-->在 GitHub 上编辑此页<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!----></a></div><div class="meta-item update-time"><span class="label">上次编辑于: </span><!----></div><div class="meta-item contributors"><span class="label">贡献者: </span><!--[--><!--[--><span class="contributor" title="email: 842830066@qq.com">huluhutu</span><!--]--><!--]--></div></footer><nav class="page-nav"><a href="/huluhutublog/pages/DB/Redis/" class="nav-link active prev" aria-label="Redis概览"><div class="hint"><span class="arrow left"></span>上一页</div><div class="link"><!---->Redis概览</div></a><a href="/huluhutublog/pages/DB/Redis/2-3%E7%A7%8D%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B.html" class="nav-link next" aria-label="2 3种特殊类型"><div class="hint">下一页<span class="arrow right"></span></div><div class="link">2 3种特殊类型<!----></div></a></nav><div class="giscus-wrapper input-top" style="display:block;"><div style="text-align:center">Loading...</div></div><!----><!--]--></main><!--]--><footer class="footer-wrapper"><div class="footer">默认页脚</div><div class="copyright">Copyright © 2022 huluhutu</div></footer><!--]--></div><!--]--><!----><!----><!--]--></div>
+    <script type="module" src="/huluhutublog/assets/app.0662e65c.js" defer></script>
+  </body>
+</html>
